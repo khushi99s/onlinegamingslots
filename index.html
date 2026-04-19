@@ -63,9 +63,11 @@
         .carousel-track { display: flex; transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94); cursor: grab; user-select: none; }
         .carousel-track.dragging { transition: none; cursor: grabbing; }
         .game-card-banner { flex: 0 0 calc(100% / 5); min-width: 0; padding: 8px; text-align: center; }
-        .game-thumb { width: 100%; aspect-ratio: 4/3; border-radius: 12px; overflow: hidden; position: relative; border: 2px solid rgba(255, 215, 0, 0.3); transition: all 0.3s; cursor: pointer; box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4); display: flex; align-items: center; justify-content: center; font-size: 2.5rem; }
-        .game-thumb:hover { transform: scale(1.08); border-color: #FFD700; box-shadow: 0 0 30px rgba(255, 215, 0, 0.5); }
-        .game-badge { position: absolute; top: 8px; left: 8px; padding: 3px 8px; border-radius: 6px; font-size: 0.65rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; }
+        .game-thumb { width: 100%; aspect-ratio: 4/3; border-radius: 12px; overflow: hidden; position: relative; border: 2px solid rgba(255, 215, 0, 0.3); transition: all 0.5s ease; cursor: pointer; box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4); display: flex; align-items: center; justify-content: center; font-size: 2.5rem; background-size: cover; background-position: center; }
+        .game-thumb::before { content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%; background: linear-gradient(to right, transparent, rgba(255,255,255,0.6), transparent); transform: skewX(-25deg); transition: all 0.6s ease; z-index: 5; pointer-events: none; }
+        .game-card-banner:hover .game-thumb::before { left: 200%; }
+        .game-card-banner:hover .game-thumb { transform: scale(1.1); border-color: #FFD700; box-shadow: 0 0 30px rgba(255, 215, 0, 0.8), 0 0 15px rgba(0, 229, 255, 0.5); filter: brightness(1.2); }
+        .game-badge { position: absolute; top: 8px; left: 8px; padding: 3px 8px; border-radius: 6px; font-size: 0.65rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; z-index: 10; box-shadow: 0 2px 10px rgba(0,0,0,0.5); }
         .badge-jackpot { background: linear-gradient(135deg, #FF6B35, #FFD700); color: #000; }
         .badge-bonus { background: linear-gradient(135deg, #00C9FF, #92FE9D); color: #000; }
         .game-name { font-size: 0.8rem; font-weight: 600; color: #ccc; margin-top: 8px; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding: 0 5px; }
@@ -146,10 +148,13 @@
 
         /* Game Grid */
         .game-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 25px; width: 90%; max-width: 1200px; padding: 40px 20px; margin: 0 auto; position: relative; z-index: 10; }
-        .game-card-grid { background: linear-gradient(135deg, #1e1e24 0%, #2d2d3a 100%); border-radius: 20px; overflow: hidden; transition: all 0.5s; display: flex; flex-direction: column; border: 2px solid rgba(255,255,255,0.08); cursor: pointer; box-shadow: 0 5px 20px rgba(0,0,0,0.3); }
-        .game-card-grid:hover { transform: translateY(-12px) scale(1.02); box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
-        .thumbnail { height: 160px; width: 100%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 1.4rem; color: white; text-shadow: 2px 2px 8px rgba(0,0,0,0.6); position: relative; font-family: 'Montserrat', sans-serif; background-size: cover; background-position: center; }
-        .card-details { padding: 20px; text-align: center; background: linear-gradient(180deg, #1e1e24 0%, #15151a 100%); }
+        .game-card-grid { background: linear-gradient(135deg, #1e1e24 0%, #2d2d3a 100%); border-radius: 20px; overflow: hidden; transition: all 0.5s; display: flex; flex-direction: column; border: 2px solid rgba(255,255,255,0.08); cursor: pointer; box-shadow: 0 5px 20px rgba(0,0,0,0.3); position: relative; }
+        .game-card-grid::before { content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%; background: linear-gradient(to right, transparent, rgba(255,255,255,0.4), transparent); transform: skewX(-25deg); transition: all 0.7s ease; z-index: 10; pointer-events: none; }
+        .game-card-grid:hover { transform: translateY(-12px) scale(1.02); box-shadow: 0 20px 50px rgba(255,214,0,0.5), 0 0 30px rgba(0,229,255,0.4); filter: brightness(1.2); border-color: rgba(255,214,0,0.6); }
+        .game-card-grid:hover::before { left: 200%; }
+        .thumbnail { height: 160px; width: 100%; display: flex; align-items: center; justify-content: center; position: relative; font-family: 'Montserrat', sans-serif; background-size: cover; background-position: center; transition: all 0.5s ease; }
+        .game-card-grid:hover .thumbnail { transform: scale(1.08); }
+        .card-details { padding: 20px; text-align: center; background: linear-gradient(180deg, #1e1e24 0%, #15151a 100%); position: relative; z-index: 2; }
         .game-title { font-family: 'Montserrat', sans-serif; font-weight: 800; margin-bottom: 10px; display: block; font-size: 1.2rem; text-transform: uppercase; }
         .provider { font-size: 0.9rem; display: inline-block; font-weight: 600; padding: 6px 18px; border-radius: 20px; background: rgba(255,255,255,0.1); margin-bottom: 12px; }
         .claim-btn { margin-top: 10px; padding: 10px 25px; background: linear-gradient(135deg, var(--green), var(--cyan)); border: none; border-radius: 25px; color: #000; font-weight: 800; cursor: pointer; text-transform: uppercase; font-size: 0.85rem; transition: all 0.4s; box-shadow: 0 4px 15px rgba(0, 229, 255, 0.4); font-family: 'Poppins', sans-serif; }
@@ -182,8 +187,10 @@
 
         /* Categories */
         .categories { display: flex; gap: 15px; padding: 40px 20px; width: 90%; max-width: 1000px; margin: 0 auto; overflow-x: auto; justify-content: center; flex-wrap: wrap; position: relative; z-index: 10; }
-        .cat-btn { padding: 12px 25px; border: none; border-radius: 50px; font-weight: 700; cursor: pointer; transition: all 0.4s; text-transform: uppercase; font-size: 0.9rem; box-shadow: 0 8px 25px rgba(0,0,0,0.3); font-family: 'Poppins', sans-serif; }
-        .cat-btn:hover { transform: scale(1.1) translateY(-5px); box-shadow: 0 15px 40px rgba(0,0,0,0.5); }
+        .cat-btn { padding: 12px 25px; border: none; border-radius: 50px; font-weight: 700; cursor: pointer; transition: all 0.4s; text-transform: uppercase; font-size: 0.9rem; box-shadow: 0 8px 25px rgba(0,0,0,0.3); font-family: 'Poppins', sans-serif; position: relative; overflow: hidden; }
+        .cat-btn::before { content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%; background: linear-gradient(to right, transparent, rgba(255,255,255,0.4), transparent); transform: skewX(-20deg); transition: all 0.5s ease; z-index: 1; pointer-events: none; }
+        .cat-btn:hover::before { left: 200%; }
+        .cat-btn:hover { transform: scale(1.1) translateY(-5px); box-shadow: 0 15px 40px rgba(255,215,0,0.5); filter: brightness(1.2); }
         .cat-slots { background: linear-gradient(135deg, var(--gold), var(--yellow)); color: #000; }
         .cat-live { background: linear-gradient(135deg, var(--red), var(--pink)); color: white; }
         .cat-table { background: linear-gradient(135deg, var(--green), var(--cyan)); color: #000; }
@@ -249,85 +256,75 @@
                     <div class="carousel-track" id="carouselTrack">
                         <!-- Juwa777 -->
                         <div class="game-card-banner" onclick="sendTelegramMessage('juwa777', 'Juwa777')">
-                            <div class="game-thumb thumb-juwa">
-                                🎰
+                            <div class="game-thumb" style="background-image: url('juwa.jpg');">
                                 <span class="game-badge badge-jackpot">Jackpot</span>
                             </div>
                             <div class="game-name">Juwa777</div>
                         </div>
                         <!-- Fire Kirin -->
                         <div class="game-card-banner" onclick="sendTelegramMessage('firekirin', 'Fire Kirin')">
-                            <div class="game-thumb thumb-firekirin">
-                                🐉
+                            <div class="game-thumb" style="background-image: url('firekirin.jpg');">
                                 <span class="game-badge badge-jackpot">Jackpot</span>
                             </div>
                             <div class="game-name">Fire Kirin</div>
                         </div>
                         <!-- Orion Stars -->
                         <div class="game-card-banner" onclick="sendTelegramMessage('orionstars', 'Orion Stars')">
-                            <div class="game-thumb thumb-orion">
-                                ⭐
+                            <div class="game-thumb" style="background-image: url('orion.jpg');">
                                 <span class="game-badge badge-bonus">Bonus</span>
                             </div>
                             <div class="game-name">Orion Stars</div>
                         </div>
                         <!-- Panda Master -->
                         <div class="game-card-banner" onclick="sendTelegramMessage('pandamaster', 'Panda Master')">
-                            <div class="game-thumb thumb-panda">
-                                🐼
+                            <div class="game-thumb" style="background-image: url('panda.jpg');">
                                 <span class="game-badge badge-jackpot">Jackpot</span>
                             </div>
                             <div class="game-name">Panda Master</div>
                         </div>
-                        <!-- Cash Machine -->
-                        <div class="game-card-banner" onclick="sendTelegramMessage('cashmachine', 'Cash Machine')">
-                            <div class="game-thumb thumb-cash">
-                                💵
+                        <!-- Milkyway (was Cash Machine) -->
+                        <div class="game-card-banner" onclick="sendTelegramMessage('milkyway', 'Milkyway')">
+                            <div class="game-thumb" style="background-image: url('milkyway.jpg');">
                                 <span class="game-badge badge-bonus">Bonus</span>
                             </div>
-                            <div class="game-name">Cash Machine</div>
+                            <div class="game-name">Milkyway</div>
                         </div>
                         
                         <!-- Duplicated for infinite scroll effect -->
                         <!-- Juwa777 -->
                         <div class="game-card-banner" onclick="sendTelegramMessage('juwa777', 'Juwa777')">
-                            <div class="game-thumb thumb-juwa">
-                                🎰
+                            <div class="game-thumb" style="background-image: url('juwa.jpg');">
                                 <span class="game-badge badge-jackpot">Jackpot</span>
                             </div>
                             <div class="game-name">Juwa777</div>
                         </div>
                         <!-- Fire Kirin -->
                         <div class="game-card-banner" onclick="sendTelegramMessage('firekirin', 'Fire Kirin')">
-                            <div class="game-thumb thumb-firekirin">
-                                🐉
+                            <div class="game-thumb" style="background-image: url('firekirin.jpg');">
                                 <span class="game-badge badge-jackpot">Jackpot</span>
                             </div>
                             <div class="game-name">Fire Kirin</div>
                         </div>
                         <!-- Orion Stars -->
                         <div class="game-card-banner" onclick="sendTelegramMessage('orionstars', 'Orion Stars')">
-                            <div class="game-thumb thumb-orion">
-                                ⭐
+                            <div class="game-thumb" style="background-image: url('orion.jpg');">
                                 <span class="game-badge badge-bonus">Bonus</span>
                             </div>
                             <div class="game-name">Orion Stars</div>
                         </div>
                         <!-- Panda Master -->
                         <div class="game-card-banner" onclick="sendTelegramMessage('pandamaster', 'Panda Master')">
-                            <div class="game-thumb thumb-panda">
-                                🐼
+                            <div class="game-thumb" style="background-image: url('panda.jpg');">
                                 <span class="game-badge badge-jackpot">Jackpot</span>
                             </div>
                             <div class="game-name">Panda Master</div>
                         </div>
-                        <!-- Cash Machine -->
-                        <div class="game-card-banner" onclick="sendTelegramMessage('cashmachine', 'Cash Machine')">
-                            <div class="game-thumb thumb-cash">
-                                💵
+                        <!-- Milkyway (was Cash Machine) -->
+                        <div class="game-card-banner" onclick="sendTelegramMessage('milkyway', 'Milkyway')">
+                            <div class="game-thumb" style="background-image: url('milkyway.jpg');">
                                 <span class="game-badge badge-bonus">Bonus</span>
                             </div>
-                            <div class="game-name">Cash Machine</div>
+                            <div class="game-name">Milkyway</div>
                         </div>
                     </div>
                 </div>
@@ -399,8 +396,7 @@
     <div class="game-grid">
         <!-- Juwa777 -->
         <div class="game-card-grid card-purple" onclick="sendTelegramMessage('juwa777', 'Juwa777')">
-            <div class="thumbnail" style="background-image: url('juwa.jpg'); background-size: cover; background-position: center;">
-                <span style="background: rgba(0,0,0,0.6); padding: 5px 15px; border-radius: 10px; font-weight: bold;">JUWA</span>
+            <div class="thumbnail" style="background-image: url('juwa.jpg');">
             </div>
             <div class="card-details">
                 <span class="game-title">Juwa777</span>
@@ -411,8 +407,7 @@
 
         <!-- Orion Stars -->
         <div class="game-card-grid card-green" onclick="sendTelegramMessage('orionstars', 'Orion Stars')">
-            <div class="thumbnail" style="background-image: url('orion.jpg'); background-size: cover; background-position: center;">
-                <span style="background: rgba(0,0,0,0.6); padding: 5px 15px; border-radius: 10px; font-weight: bold;">ORION</span>
+            <div class="thumbnail" style="background-image: url('orion.jpg');">
             </div>
             <div class="card-details">
                 <span class="game-title">Orion Stars</span>
@@ -423,8 +418,7 @@
 
         <!-- Fire Kirin -->
         <div class="game-card-grid card-red" onclick="sendTelegramMessage('firekirin', 'Fire Kirin')">
-            <div class="thumbnail" style="background-image: url('firekirin.jpg'); background-size: cover; background-position: center;">
-                <span style="background: rgba(0,0,0,0.6); padding: 5px 15px; border-radius: 10px; font-weight: bold;">KIRIN</span>
+            <div class="thumbnail" style="background-image: url('firekirin.jpg');">
             </div>
             <div class="card-details">
                 <span class="game-title">Fire Kirin</span>
@@ -435,8 +429,7 @@
 
         <!-- Panda Master -->
         <div class="game-card-grid card-blue" onclick="sendTelegramMessage('pandamaster', 'Panda Master')">
-            <div class="thumbnail" style="background-image: url('panda.jpg'); background-size: cover; background-position: center;">
-                <span style="background: rgba(0,0,0,0.6); padding: 5px 15px; border-radius: 10px; font-weight: bold;">PANDA</span>
+            <div class="thumbnail" style="background-image: url('panda.jpg');">
             </div>
             <div class="card-details">
                 <span class="game-title">Panda Master</span>
@@ -445,22 +438,20 @@
             </div>
         </div>
 
-        <!-- Cash Machine -->
-        <div class="game-card-grid card-gold" onclick="sendTelegramMessage('cashmachine', 'Cash Machine')">
-            <div class="thumbnail" style="background-image: url('cash.jpg'); background-size: cover; background-position: center;">
-                <span style="background: rgba(0,0,0,0.6); padding: 5px 15px; border-radius: 10px; font-weight: bold;">CASH</span>
+        <!-- Milkyway -->
+        <div class="game-card-grid card-gold" onclick="sendTelegramMessage('milkyway', 'Milkyway')">
+            <div class="thumbnail" style="background-image: url('milkyway.jpg');">
             </div>
             <div class="card-details">
-                <span class="game-title">Cash Machine</span>
-                <span class="provider">Cash Games</span>
+                <span class="game-title">Milkyway</span>
+                <span class="provider">Milky Games</span>
                 <br><button class="claim-btn">GET FREEPLAY</button>
             </div>
         </div>
 
         <!-- Mafia -->
         <div class="game-card-grid card-pink" onclick="sendTelegramMessage('mafia', 'Mafia')">
-            <div class="thumbnail" style="background-image: url('mafia.jpg'); background-size: cover; background-position: center;">
-                <span style="background: rgba(0,0,0,0.6); padding: 5px 15px; border-radius: 10px; font-weight: bold;">MAFIA</span>
+            <div class="thumbnail" style="background-image: url('mafia.jpg');">
             </div>
             <div class="card-details">
                 <span class="game-title">Mafia</span>
@@ -471,8 +462,7 @@
 
         <!-- Game Vault -->
         <div class="game-card-grid card-cyan" onclick="sendTelegramMessage('gamevault', 'Game Vault')">
-            <div class="thumbnail" style="background-image: url('vault.jpg'); background-size: cover; background-position: center;">
-                <span style="background: rgba(0,0,0,0.6); padding: 5px 15px; border-radius: 10px; font-weight: bold;">VAULT</span>
+            <div class="thumbnail" style="background-image: url('vault.jpg');">
             </div>
             <div class="card-details">
                 <span class="game-title">Game Vault</span>
@@ -483,8 +473,7 @@
 
         <!-- Vegas Sweeps -->
         <div class="game-card-grid card-yellow" onclick="sendTelegramMessage('vegassweeps', 'Vegas Sweeps')">
-            <div class="thumbnail" style="background-image: url('vegas.jpg'); background-size: cover; background-position: center;">
-                <span style="background: rgba(0,0,0,0.6); padding: 5px 15px; border-radius: 10px; font-weight: bold;">VEGAS</span>
+            <div class="thumbnail" style="background-image: url('vegas.jpg');">
             </div>
             <div class="card-details">
                 <span class="game-title">Vegas Sweeps</span>
@@ -495,8 +484,7 @@
 
         <!-- Blue Dragon -->
         <div class="game-card-grid card-electric" onclick="sendTelegramMessage('bluedragon', 'Blue Dragon')">
-            <div class="thumbnail" style="background-image: url('dragon.jpg'); background-size: cover; background-position: center;">
-                <span style="background: rgba(0,0,0,0.6); padding: 5px 15px; border-radius: 10px; font-weight: bold;">DRAGON</span>
+            <div class="thumbnail" style="background-image: url('dragon.jpg');">
             </div>
             <div class="card-details">
                 <span class="game-title">Blue Dragon</span>
@@ -507,8 +495,7 @@
 
         <!-- Mr All in One -->
         <div class="game-card-grid card-orange" onclick="sendTelegramMessage('mrallinone', 'Mr All in One')">
-            <div class="thumbnail" style="background-image: url('allin.jpg'); background-size: cover; background-position: center;">
-                <span style="background: rgba(0,0,0,0.6); padding: 5px 15px; border-radius: 10px; font-weight: bold;">ALL IN</span>
+            <div class="thumbnail" style="background-image: url('allin.jpg');">
             </div>
             <div class="card-details">
                 <span class="game-title">Mr All in One</span>
@@ -519,8 +506,7 @@
 
         <!-- Highstakes -->
         <div class="game-card-grid card-dark" onclick="sendTelegramMessage('highstakes', 'Highstakes')">
-            <div class="thumbnail" style="background-image: url('high.jpg'); background-size: cover; background-position: center;">
-                <span style="background: rgba(0,0,0,0.6); padding: 5px 15px; border-radius: 10px; font-weight: bold;">HIGH</span>
+            <div class="thumbnail" style="background-image: url('high.jpg');">
             </div>
             <div class="card-details">
                 <span class="game-title">Highstakes</span>
@@ -531,8 +517,7 @@
 
         <!-- River Monster -->
         <div class="game-card-grid card-teal" onclick="sendTelegramMessage('rivermonster', 'River Monster')">
-            <div class="thumbnail" style="background-image: url('monster.jpg'); background-size: cover; background-position: center;">
-                <span style="background: rgba(0,0,0,0.6); padding: 5px 15px; border-radius: 10px; font-weight: bold;">MONSTER</span>
+            <div class="thumbnail" style="background-image: url('monster.jpg');">
             </div>
             <div class="card-details">
                 <span class="game-title">River Monster</span>
@@ -609,7 +594,7 @@
             }
         }
 
-        for (let i = 0; i < 150; i++) particles.push(new Particle());
+        for (let i = 0; i < 400; i++) particles.push(new Particle());
         function animateParticles() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             particles.forEach(p => { p.update(); p.draw(); });
@@ -620,8 +605,8 @@
         // === FLOATING PARTICLES ===
         function initParticles() {
             const container = document.getElementById('particleContainer');
-            const emojis = ['💎', '🎰', '💰', '🎲', '', '✨', '', '🍀'];
-            for (let i = 0; i < 25; i++) {
+            const emojis = ['💎', '🎰', '💰', '🎲', '🌟', '✨', '💫', '🍀'];
+            for (let i = 0; i < 75; i++) {
                 const particle = document.createElement('div');
                 particle.className = 'particle';
                 particle.textContent = emojis[Math.floor(Math.random() * emojis.length)];

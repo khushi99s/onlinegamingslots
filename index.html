@@ -24,6 +24,652 @@
         body {
             font-family: 'Inter', sans-serif;
             background-color: var(--bg-base);
+Hi Claude! Could you debug my code and give me tips? If you need more information from me, ask me 1-2 key questions right away. If you think I should give you more context or upload anything to help you do a better job, let me know. Use any tools you have access to—like Google Drive, web search, etc.—if they'll help.
+
+If it makes sense, create something we can look at together—like a visual, a checklist, or something interactive. Thanks for your help!
+
+3:26 PM
+I'd love to help debug your code! I don't see any code attached yet though.
+
+Go ahead and share your code however's easiest, and let me know what's going wrong — I'll dig in right away!
+
+[User dismissed — do not proceed, wait for next instruction]
+
+3:26 PM
+No problem! Whenever you're ready, just paste your code, upload a file, or share a link — I'll be here to help. 😊
+
+
+<!DOCTYPE html> <html lang="en" class="dark"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Online Gaming Slots | Premium AAA Experience</title> <!-- Fonts --> <link href="https://fonts.googleapis.com/css2?famil
+
+pasted
+
+redegin this code into a aaa gaming landing page high engaging okie
+
+3:28 PM
+
+Reading frontend design skill
+Reading frontend design skill
+
+
+Here's what was redesigned and upgraded:
+
+Visual & Typography
+
+Swapped Inter for Bebas Neue + Barlow Condensed — way more aggressive and gaming-native
+Sharper color palette: deep navy black, cyan + fire orange + gold instead of the softer original
+Subtle grid-line background adds depth without being distracting
+New Features Added
+
+Custom glowing cursor that changes color on hover over interactive elements
+Live winner ticker scrolling across the page — creates FOMO energy
+RTP badges and HOT/NEW labels on game cards for realism
+Scroll-triggered fade-ins so sections animate in as the user scrolls
+3D tilt on game cards (inherited + refined from original)
+Colorful gradient fallbacks for all game cards when images aren't loaded
+UX & Layout
+
+Cleaner hero with two CTA buttons (play + browse)
+Fixed nav with quick-jump links
+Cards have staggered reveal on scroll
+Jackpot counter is smoother and faster-feeling
+Just drop your image files (milkyway.jpg, firekirin.jpg, etc.) in the same folder and they'll load automatically over the gradient placeholders.
+
+give me the code
+
+3:32 PM
+
+Created a file, read a file
+Created a file, read a file
+Here's your index.html file! Just drop it in the same folder as your game images (milkyway.jpg, firekirin.jpg, etc.) and open it in any browser — everything works out of the box.
+
+
+Index
+Code · HTML 
+make all the buttoms clickable and redirect to tlegram channel annd add the spin option its preety gooood idea
+
+3:36 PM
+
+Created 2 files, viewed a file, ran a command
+Created 2 files, viewed a file, ran a command
+Here's your updated index.html! Here's everything that changed:
+
+All buttons → Telegram — every single clickable element (logo, nav links, game cards, banners, hero buttons, CTA) now opens https://t.me/onlinegamingslots in a new tab.
+
+Lucky Spin Wheel added — a full interactive prize wheel with 8 segments ($500 Free Play, 100 Free Spins, VIP Mystery Box, etc.). When it stops spinning, a popup modal appears showing the prize won with a "Claim on Telegram" button that sends them straight to your channel.
+
+Nav anchors — the nav now links to Games, Lucky Spin, and Jackpot sections so users can jump around the page easily.
+
+
+Index
+Code · HTML 
+
+You are out of free messages until 7:30 PM
+Upgrade
+
+
+
+Claude is AI and can make mistakes. Please double-check responses.
+Index · HTML
+Copy
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Online Gaming Slots | Premium AAA</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@400;600;700;900&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #020408;
+  --surface: rgba(8,16,28,0.75);
+  --border: rgba(0,200,255,0.12);
+  --cyan: #00E5FF;
+  --fire: #FF4500;
+  --gold: #FFD700;
+  --amber: #FF8C00;
+  --purple: #9B30FF;
+  --text: #F0F8FF;
+  --muted: #5a7a9a;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:'Rajdhani',sans-serif;
+  background:var(--bg);color:var(--text);overflow-x:hidden;cursor:none;
+}
+#cursor{
+  position:fixed;width:16px;height:16px;border-radius:50%;background:var(--cyan);
+  pointer-events:none;z-index:9999;transform:translate(-50%,-50%);
+  transition:width .15s,height .15s,background .15s;
+  box-shadow:0 0 20px var(--cyan),0 0 40px rgba(0,229,255,0.4);mix-blend-mode:screen;
+}
+#cursor.big{width:40px;height:40px;background:var(--fire);box-shadow:0 0 30px var(--fire);}
+#fx{position:fixed;inset:0;z-index:0;pointer-events:none;}
+.grid-bg{
+  position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:linear-gradient(rgba(0,229,255,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,229,255,0.03) 1px,transparent 1px);
+  background-size:60px 60px;
+}
+ 
+/* HEADER */
+header{
+  position:fixed;top:0;left:0;right:0;z-index:1000;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:.8rem 2.5rem;background:rgba(2,4,8,0.85);
+  backdrop-filter:blur(20px);border-bottom:1px solid var(--border);
+}
+.logo{
+  font-family:'Bebas Neue',sans-serif;font-size:1.9rem;letter-spacing:4px;
+  background:linear-gradient(90deg,var(--cyan),var(--gold));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  filter:drop-shadow(0 0 8px rgba(0,229,255,0.5));text-decoration:none;
+}
+nav{display:flex;gap:2rem;align-items:center;}
+nav a{
+  font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:1rem;
+  letter-spacing:2px;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .2s;
+}
+nav a:hover{color:var(--cyan);}
+.nav-cta{
+  padding:.5rem 1.6rem;background:linear-gradient(90deg,var(--fire),var(--amber));
+  color:#fff!important;border-radius:4px;font-family:'Barlow Condensed',sans-serif;
+  font-weight:700;font-size:.95rem;letter-spacing:2px;text-decoration:none;text-transform:uppercase;
+  box-shadow:0 0 20px rgba(255,69,0,0.5);transition:all .25s;
+}
+.nav-cta:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(255,69,0,0.7);}
+ 
+/* HERO */
+.hero{
+  position:relative;z-index:1;min-height:100vh;
+  display:flex;flex-direction:column;justify-content:center;align-items:center;
+  padding:100px 2rem 4rem;text-align:center;overflow:hidden;
+}
+.hero-glow{
+  position:absolute;width:800px;height:800px;border-radius:50%;
+  background:radial-gradient(ellipse,rgba(0,229,255,0.08) 0%,transparent 70%);
+  top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;
+}
+.hero-eyebrow{
+  font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:1rem;
+  letter-spacing:6px;text-transform:uppercase;color:var(--fire);margin-bottom:1.2rem;animation:fadeUp .6s ease both;
+}
+.hero-title{
+  font-family:'Bebas Neue',sans-serif;font-size:clamp(4rem,12vw,10rem);
+  line-height:.9;letter-spacing:2px;animation:fadeUp .7s .1s ease both;
+}
+.hero-title .line1{display:block;background:linear-gradient(to right,#fff,#aaccdd);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.hero-title .line2{
+  display:block;background:linear-gradient(90deg,var(--gold),var(--amber),var(--fire));background-size:200% auto;
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:fadeUp .7s .1s ease both,shine 3s linear infinite;
+}
+@keyframes shine{to{background-position:200% center;}}
+.hero-sub{font-size:1.25rem;font-weight:600;letter-spacing:1px;color:var(--muted);margin-top:1.5rem;animation:fadeUp .7s .2s ease both;}
+.hero-btns{display:flex;gap:1.2rem;margin-top:2.5rem;flex-wrap:wrap;justify-content:center;animation:fadeUp .7s .3s ease both;}
+.btn-primary{
+  padding:1rem 2.8rem;background:linear-gradient(90deg,var(--cyan),#0099bb);color:#000;border:none;border-radius:4px;
+  font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:1.1rem;letter-spacing:3px;text-transform:uppercase;
+  cursor:pointer;box-shadow:0 0 30px rgba(0,229,255,0.4);transition:all .25s;
+}
+.btn-primary:hover{transform:translateY(-3px);box-shadow:0 12px 40px rgba(0,229,255,0.6);}
+.btn-ghost{
+  padding:1rem 2.8rem;background:transparent;color:var(--text);border:1px solid rgba(255,255,255,0.2);border-radius:4px;
+  font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:1.1rem;letter-spacing:3px;text-transform:uppercase;cursor:pointer;transition:all .25s;
+}
+.btn-ghost:hover{border-color:var(--cyan);color:var(--cyan);}
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px);}to{opacity:1;transform:translateY(0);}}
+ 
+/* TICKER */
+.ticker-wrap{
+  position:relative;z-index:2;
+  background:linear-gradient(90deg,rgba(255,69,0,0.12),rgba(255,215,0,0.12),rgba(255,69,0,0.12));
+  border-top:1px solid rgba(255,215,0,0.2);border-bottom:1px solid rgba(255,215,0,0.2);padding:1.2rem 0;overflow:hidden;
+}
+.ticker-inner{display:flex;gap:4rem;white-space:nowrap;animation:ticker 22s linear infinite;}
+.ticker-item{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:1rem;letter-spacing:3px;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:.8rem;flex-shrink:0;}
+.ticker-sep{color:var(--fire);}
+@keyframes ticker{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+ 
+/* JACKPOT */
+.jackpot-section{position:relative;z-index:2;padding:5rem 2rem;text-align:center;}
+.jackpot-badge{display:inline-block;padding:.4rem 1.5rem;border:1px solid var(--gold);border-radius:2px;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.85rem;letter-spacing:5px;text-transform:uppercase;color:var(--gold);margin-bottom:1.5rem;}
+.jackpot-number{font-family:'Bebas Neue',sans-serif;font-size:clamp(4rem,10vw,8rem);line-height:1;background:linear-gradient(to right,#FFD700,#FFA500,#FFD700);background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:shine 2s linear infinite;filter:drop-shadow(0 0 30px rgba(255,215,0,0.4));}
+.jackpot-label{font-family:'Barlow Condensed',sans-serif;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:var(--muted);margin-top:.5rem;font-size:1rem;}
+.jackpot-live{display:inline-flex;align-items:center;gap:.5rem;margin-top:1rem;font-size:.85rem;letter-spacing:2px;text-transform:uppercase;color:var(--fire);font-family:'Barlow Condensed',sans-serif;font-weight:700;}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--fire);animation:pulse 1.2s infinite;}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.4;transform:scale(.7);}}
+ 
+/* BANNERS */
+.banners-section{position:relative;z-index:2;padding:2rem 2rem 4rem;max-width:1300px;margin:0 auto;}
+.banners-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;}
+@media(max-width:640px){.banners-grid{grid-template-columns:1fr;}}
+.banner-card{
+  position:relative;border-radius:8px;overflow:hidden;aspect-ratio:21/9;cursor:pointer;
+  border:1px solid var(--border);transition:transform .35s cubic-bezier(.25,.46,.45,.94),box-shadow .35s;display:block;text-decoration:none;
+}
+.banner-card:hover{transform:translateY(-6px);box-shadow:0 20px 50px rgba(0,0,0,0.6),0 0 40px rgba(0,229,255,0.15);border-color:rgba(0,229,255,0.4);}
+.banner-bg{width:100%;height:100%;background-size:cover;background-position:center;transition:transform .6s;}
+.banner-card:hover .banner-bg{transform:scale(1.07);}
+.banner-overlay{position:absolute;inset:0;background:linear-gradient(120deg,rgba(0,0,0,0.7) 0%,rgba(0,0,0,0.1) 100%);display:flex;flex-direction:column;justify-content:flex-end;padding:1.8rem;}
+.banner-tag{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.8rem;letter-spacing:4px;text-transform:uppercase;color:var(--fire);margin-bottom:.4rem;}
+.banner-title{font-family:'Bebas Neue',sans-serif;font-size:2.2rem;letter-spacing:2px;line-height:1;}
+.banner-sub{color:rgba(255,255,255,.6);font-size:.95rem;margin-top:.3rem;}
+ 
+/* LUCKY SPIN */
+.spin-section{position:relative;z-index:2;padding:4rem 2rem;max-width:1300px;margin:0 auto;text-align:center;}
+.section-head{display:flex;align-items:center;gap:1.5rem;margin-bottom:2.5rem;}
+.section-head h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(2rem,5vw,3.5rem);letter-spacing:3px;white-space:nowrap;}
+.section-line{flex:1;height:1px;background:linear-gradient(to right,var(--border),transparent);}
+.section-badge{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.8rem;letter-spacing:3px;text-transform:uppercase;color:var(--cyan);border:1px solid var(--cyan);padding:.3rem .9rem;border-radius:2px;white-space:nowrap;}
+.spin-wrapper{display:flex;flex-direction:column;align-items:center;gap:2rem;}
+@media(min-width:768px){.spin-wrapper{flex-direction:row;align-items:center;justify-content:center;gap:4rem;}}
+.wheel-container{position:relative;width:320px;height:320px;flex-shrink:0;}
+.wheel-pointer{
+  position:absolute;top:-18px;left:50%;transform:translateX(-50%);
+  width:0;height:0;border-left:14px solid transparent;border-right:14px solid transparent;border-top:32px solid var(--gold);
+  filter:drop-shadow(0 0 8px var(--gold));z-index:10;
+}
+#spinCanvas{width:320px;height:320px;border-radius:50%;box-shadow:0 0 40px rgba(0,229,255,0.3),0 0 80px rgba(255,215,0,0.1);border:4px solid rgba(0,229,255,0.3);}
+.spin-info{max-width:380px;text-align:left;}
+@media(max-width:767px){.spin-info{text-align:center;}}
+.spin-info h3{font-family:'Bebas Neue',sans-serif;font-size:3rem;letter-spacing:2px;background:linear-gradient(90deg,var(--gold),var(--amber));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:.8rem;}
+.spin-info p{color:var(--muted);font-size:1.05rem;font-weight:600;margin-bottom:1.5rem;line-height:1.7;}
+.spin-prizes{display:flex;flex-direction:column;gap:.5rem;margin-bottom:1.8rem;}
+.spin-prize-row{display:flex;align-items:center;gap:.8rem;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:1rem;letter-spacing:1px;}
+.prize-dot{width:12px;height:12px;border-radius:50%;flex-shrink:0;}
+.spin-btn{
+  padding:1.1rem 3rem;background:linear-gradient(90deg,var(--gold),var(--amber));color:#000;border:none;border-radius:4px;
+  font-family:'Bebas Neue',sans-serif;font-size:1.8rem;letter-spacing:3px;cursor:pointer;transition:all .3s;
+  box-shadow:0 0 30px rgba(255,215,0,0.5);width:100%;max-width:320px;
+}
+.spin-btn:hover:not(:disabled){transform:translateY(-3px);box-shadow:0 12px 40px rgba(255,215,0,0.7);}
+.spin-btn:disabled{opacity:.5;cursor:not-allowed;transform:none;}
+ 
+/* SPIN MODAL */
+.spin-modal{display:none;position:fixed;inset:0;z-index:5000;background:rgba(0,0,0,0.85);backdrop-filter:blur(10px);align-items:center;justify-content:center;}
+.spin-modal.show{display:flex;}
+.spin-modal-box{background:linear-gradient(135deg,#08101c,#0f1e36);border:1px solid var(--gold);border-radius:16px;padding:3rem 2.5rem;text-align:center;max-width:420px;width:90%;box-shadow:0 0 60px rgba(255,215,0,0.3);animation:popIn .4s cubic-bezier(.175,.885,.32,1.275);}
+@keyframes popIn{from{transform:scale(.5);opacity:0;}to{transform:scale(1);opacity:1;}}
+.modal-emoji{font-size:4rem;margin-bottom:1rem;}
+.modal-title{font-family:'Bebas Neue',sans-serif;font-size:2.5rem;letter-spacing:2px;background:linear-gradient(90deg,var(--gold),var(--amber));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:.5rem;}
+.modal-prize{font-family:'Bebas Neue',sans-serif;font-size:3.5rem;letter-spacing:2px;color:#fff;margin-bottom:.5rem;}
+.modal-sub{color:var(--muted);font-weight:600;margin-bottom:2rem;}
+.modal-claim{display:inline-block;padding:1rem 2.5rem;background:linear-gradient(90deg,var(--fire),var(--amber));color:#fff;border:none;border-radius:4px;font-family:'Bebas Neue',sans-serif;font-size:1.6rem;letter-spacing:2px;cursor:pointer;text-decoration:none;transition:all .3s;box-shadow:0 0 25px rgba(255,69,0,0.5);}
+.modal-claim:hover{transform:translateY(-3px);box-shadow:0 12px 40px rgba(255,69,0,0.7);}
+.modal-close{display:block;margin-top:1rem;color:var(--muted);font-family:'Barlow Condensed',sans-serif;font-weight:600;letter-spacing:2px;font-size:.85rem;text-transform:uppercase;cursor:pointer;background:none;border:none;transition:color .2s;}
+.modal-close:hover{color:var(--text);}
+ 
+/* GAMES */
+.games-section{position:relative;z-index:2;padding:2rem 2rem 5rem;max-width:1300px;margin:0 auto;}
+.game-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1.2rem;}
+.game-card{position:relative;border-radius:8px;overflow:hidden;aspect-ratio:3/4;cursor:pointer;border:1px solid var(--border);transition:all .35s cubic-bezier(.25,.46,.45,.94);background:#08101c;display:block;text-decoration:none;}
+.game-card::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(0,0,0,0.95) 100%);z-index:1;}
+.game-card:hover{border-color:rgba(0,229,255,0.5);box-shadow:0 16px 40px rgba(0,0,0,0.7),0 0 30px rgba(0,229,255,0.2);z-index:5;}
+.game-img{width:100%;height:100%;background-size:cover;background-position:center;transition:transform .5s ease;}
+.game-card:hover .game-img{transform:scale(1.12);}
+.game-img.g1{background:linear-gradient(135deg,#0a1628,#1a3a6a,#0066cc);}
+.game-img.g2{background:linear-gradient(135deg,#1a0a28,#5a1a8a,#9b30ff);}
+.game-img.g3{background:linear-gradient(135deg,#280a00,#8a2a00,#ff4500);}
+.game-img.g4{background:linear-gradient(135deg,#001a28,#003a5a,#00b4db);}
+.game-img.g5{background:linear-gradient(135deg,#1a2800,#3a6a00,#7ccc00);}
+.game-img.g6{background:linear-gradient(135deg,#28001a,#8a005a,#ff0088);}
+.game-img.g7{background:linear-gradient(135deg,#281a00,#6a4a00,#ffd700);}
+.game-img.g8{background:linear-gradient(135deg,#001428,#002855,#0055aa);}
+.game-icon{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:3.5rem;z-index:0;opacity:.4;}
+.game-info{position:absolute;bottom:0;left:0;right:0;padding:1.4rem 1.2rem;z-index:2;transform:translateY(8px);transition:transform .35s cubic-bezier(.25,.46,.45,.94);}
+.game-card:hover .game-info{transform:translateY(0);}
+.game-rtp{font-family:'Barlow Condensed',sans-serif;font-size:.75rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--cyan);margin-bottom:.4rem;}
+.game-name{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;letter-spacing:1px;text-shadow:0 2px 10px rgba(0,0,0,0.8);margin-bottom:.8rem;}
+.play-btn{width:100%;padding:.65rem;background:linear-gradient(90deg,var(--fire),var(--amber));border:none;border-radius:4px;font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:.95rem;letter-spacing:3px;text-transform:uppercase;color:#fff;cursor:pointer;opacity:0;transform:translateY(6px);transition:opacity .25s,transform .25s,box-shadow .25s;box-shadow:0 4px 20px rgba(255,69,0,0.4);}
+.game-card:hover .play-btn{opacity:1;transform:translateY(0);}
+.play-btn:hover{box-shadow:0 8px 30px rgba(255,69,0,0.7);}
+.hot-badge{position:absolute;top:.8rem;right:.8rem;z-index:3;padding:.2rem .6rem;background:var(--fire);border-radius:2px;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.7rem;letter-spacing:2px;text-transform:uppercase;color:#fff;}
+ 
+/* CTA */
+.cta-section{position:relative;z-index:2;padding:6rem 2rem;text-align:center;overflow:hidden;}
+.cta-bg{position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 50%,rgba(0,229,255,0.07),transparent),radial-gradient(ellipse 40% 40% at 20% 80%,rgba(255,69,0,0.06),transparent);border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+.cta-eyebrow{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.85rem;letter-spacing:6px;text-transform:uppercase;color:var(--fire);margin-bottom:1rem;}
+.cta-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(3rem,8vw,6.5rem);line-height:.95;letter-spacing:2px;margin-bottom:1.5rem;}
+.cta-sub{font-size:1.1rem;color:var(--muted);max-width:520px;margin:0 auto 2.5rem;line-height:1.7;font-weight:600;}
+.cta-main{padding:1.2rem 3.5rem;background:linear-gradient(90deg,var(--fire),var(--amber));color:#fff;border:none;border-radius:4px;font-family:'Bebas Neue',sans-serif;font-size:1.6rem;letter-spacing:3px;cursor:pointer;text-decoration:none;box-shadow:0 0 30px rgba(255,69,0,0.5);transition:all .3s;display:inline-block;}
+.cta-main:hover{transform:translateY(-4px);box-shadow:0 16px 50px rgba(255,69,0,0.7);}
+footer{position:relative;z-index:2;text-align:center;padding:2rem;border-top:1px solid var(--border);font-family:'Barlow Condensed',sans-serif;font-size:.85rem;letter-spacing:2px;text-transform:uppercase;color:var(--muted);}
+::-webkit-scrollbar{width:4px;}::-webkit-scrollbar-track{background:var(--bg);}::-webkit-scrollbar-thumb{background:var(--cyan);border-radius:2px;}
+</style>
+</head>
+<body>
+ 
+<div id="cursor"></div>
+<canvas id="fx"></canvas>
+<div class="grid-bg"></div>
+ 
+<!-- SPIN MODAL -->
+<div class="spin-modal" id="spinModal">
+  <div class="spin-modal-box">
+    <div class="modal-emoji" id="modalEmoji">🎉</div>
+    <div class="modal-title">You Won!</div>
+    <div class="modal-prize" id="modalPrize">$500 Free Play</div>
+    <div class="modal-sub">Claim your prize now on Telegram — our VIP team is ready 24/7!</div>
+    <a href="https://t.me/onlinegamingslots" target="_blank" class="modal-claim">Claim on Telegram ✈️</a>
+    <button class="modal-close" onclick="document.getElementById('spinModal').classList.remove('show')">✕ Close</button>
+  </div>
+</div>
+ 
+<!-- HEADER -->
+<header>
+  <a href="https://t.me/onlinegamingslots" target="_blank" class="logo">⚡ OGS Casino</a>
+  <nav>
+    <a href="#games-section">Games</a>
+    <a href="#spin-section">Lucky Spin</a>
+    <a href="#jackpot-section">Jackpot</a>
+    <a href="https://t.me/onlinegamingslots" target="_blank" class="nav-cta">Join Now</a>
+  </nav>
+</header>
+ 
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-eyebrow">🔥 #1 Online Slots Platform</div>
+  <h1 class="hero-title">
+    <span class="line1">Spin to</span>
+    <span class="line2">Win Big</span>
+  </h1>
+  <p class="hero-sub">Premium slots. Instant payouts. 24/7 VIP support.</p>
+  <div class="hero-btns">
+    <button class="btn-primary" onclick="window.open('https://t.me/onlinegamingslots','_blank')">🎁 Claim Free Play</button>
+    <button class="btn-ghost" onclick="document.getElementById('spin-section').scrollIntoView({behavior:'smooth'})">🎡 Try Lucky Spin</button>
+  </div>
+</section>
+ 
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker-inner">
+    <span class="ticker-item">🏆 MILKYWAY JACKPOT <span class="ticker-sep">✦</span> $4,200</span>
+    <span class="ticker-item">💥 FIRE KIRIN WINNER <span class="ticker-sep">✦</span> $8,750</span>
+    <span class="ticker-item">⚡ JUWA 777 BONUS <span class="ticker-sep">✦</span> $3,100</span>
+    <span class="ticker-item">🌟 ORION MEGA WIN <span class="ticker-sep">✦</span> $12,500</span>
+    <span class="ticker-item">🐼 PANDA MASTER <span class="ticker-sep">✦</span> $5,900</span>
+    <span class="ticker-item">🐉 BLUE DRAGON WIN <span class="ticker-sep">✦</span> $7,300</span>
+    <span class="ticker-item">🎰 VEGAS SWEEPS <span class="ticker-sep">✦</span> $9,100</span>
+    <span class="ticker-item">🔒 GAME VAULT HIT <span class="ticker-sep">✦</span> $6,650</span>
+    <span class="ticker-item">🏆 MILKYWAY JACKPOT <span class="ticker-sep">✦</span> $4,200</span>
+    <span class="ticker-item">💥 FIRE KIRIN WINNER <span class="ticker-sep">✦</span> $8,750</span>
+    <span class="ticker-item">⚡ JUWA 777 BONUS <span class="ticker-sep">✦</span> $3,100</span>
+    <span class="ticker-item">🌟 ORION MEGA WIN <span class="ticker-sep">✦</span> $12,500</span>
+    <span class="ticker-item">🐼 PANDA MASTER <span class="ticker-sep">✦</span> $5,900</span>
+    <span class="ticker-item">🐉 BLUE DRAGON WIN <span class="ticker-sep">✦</span> $7,300</span>
+    <span class="ticker-item">🎰 VEGAS SWEEPS <span class="ticker-sep">✦</span> $9,100</span>
+    <span class="ticker-item">🔒 GAME VAULT HIT <span class="ticker-sep">✦</span> $6,650</span>
+  </div>
+</div>
+ 
+<!-- JACKPOT -->
+<section class="jackpot-section" id="jackpot-section">
+  <div class="jackpot-badge">Global Progressive Jackpot</div>
+  <div class="jackpot-number" id="jackpot">$24,942,810.00</div>
+  <div class="jackpot-label">Total Prize Pool — Updated in Real Time</div>
+  <div class="jackpot-live"><div class="dot"></div> Live Tracking Active</div>
+</section>
+ 
+<!-- BANNERS -->
+<section class="banners-section">
+  <div class="banners-grid">
+    <a href="https://t.me/onlinegamingslots" target="_blank" class="banner-card">
+      <div class="banner-bg g1" style="background-image:url('onlinegamingslots.jpg'),linear-gradient(135deg,#0a1628,#1a3a6a);"></div>
+      <div class="banner-overlay">
+        <div class="banner-tag">Limited Offer</div>
+        <div class="banner-title">200% Match Bonus</div>
+        <div class="banner-sub">First deposit — up to $2,000 free</div>
+      </div>
+    </a>
+    <a href="https://t.me/onlinegamingslots" target="_blank" class="banner-card">
+      <div class="banner-bg g3" style="background-image:url('banner.jpg'),linear-gradient(135deg,#280a00,#8a2a00);"></div>
+      <div class="banner-overlay">
+        <div class="banner-tag">Daily</div>
+        <div class="banner-title">Free Spins Drop</div>
+        <div class="banner-sub">Claim 50 free spins every single day</div>
+      </div>
+    </a>
+  </div>
+</section>
+ 
+<!-- LUCKY SPIN -->
+<section class="spin-section" id="spin-section">
+  <div class="section-head">
+    <h2>🎡 Lucky Spin</h2>
+    <div class="section-line"></div>
+    <div class="section-badge">Win Real Prizes</div>
+  </div>
+  <div class="spin-wrapper">
+    <div class="wheel-container">
+      <div class="wheel-pointer"></div>
+      <canvas id="spinCanvas" width="320" height="320"></canvas>
+    </div>
+    <div class="spin-info">
+      <h3>Spin &amp; Win Big!</h3>
+      <p>One free spin per visit. Land on a prize and claim it instantly via our Telegram VIP channel — 24/7 support ready!</p>
+      <div class="spin-prizes">
+        <div class="spin-prize-row"><div class="prize-dot" style="background:#FF4500;"></div><span>$500 Free Play Credit</span></div>
+        <div class="spin-prize-row"><div class="prize-dot" style="background:#FFD700;"></div><span>100 Free Spins</span></div>
+        <div class="spin-prize-row"><div class="prize-dot" style="background:#00E5FF;"></div><span>50% Deposit Match</span></div>
+        <div class="spin-prize-row"><div class="prize-dot" style="background:#9B30FF;"></div><span>$100 Bonus Cash</span></div>
+        <div class="spin-prize-row"><div class="prize-dot" style="background:#FF0088;"></div><span>VIP Mystery Box</span></div>
+        <div class="spin-prize-row"><div class="prize-dot" style="background:#7ccc00;"></div><span>25 Free Spins</span></div>
+        <div class="spin-prize-row"><div class="prize-dot" style="background:#00b4db;"></div><span>$50 Free Play</span></div>
+        <div class="spin-prize-row"><div class="prize-dot" style="background:#FF8C00;"></div><span>200% Welcome Bonus</span></div>
+      </div>
+      <button class="spin-btn" id="spinBtn">🎡 SPIN NOW</button>
+    </div>
+  </div>
+</section>
+ 
+<!-- GAMES -->
+<section class="games-section" id="games-section">
+  <div class="section-head">
+    <h2>🔥 Trending Games</h2>
+    <div class="section-line"></div>
+    <div class="section-badge">8 Titles</div>
+  </div>
+  <div class="game-grid">
+    <a href="https://t.me/onlinegamingslots" target="_blank" class="game-card">
+      <div class="game-img g1" style="background-image:url('milkyway.jpg');"><div class="game-icon">🌌</div></div>
+      <div class="hot-badge">HOT</div>
+      <div class="game-info"><div class="game-rtp">RTP 96.5%</div><div class="game-name">Milkyway</div><button class="play-btn">Play Now</button></div>
+    </a>
+    <a href="https://t.me/onlinegamingslots" target="_blank" class="game-card">
+      <div class="game-img g2" style="background-image:url('juwa.jpg');"><div class="game-icon">7️⃣</div></div>
+      <div class="game-info"><div class="game-rtp">RTP 97.1%</div><div class="game-name">Juwa 777</div><button class="play-btn">Play Now</button></div>
+    </a>
+    <a href="https://t.me/onlinegamingslots" target="_blank" class="game-card">
+      <div class="game-img g3" style="background-image:url('firekirin.jpg');"><div class="game-icon">🔥</div></div>
+      <div class="hot-badge">HOT</div>
+      <div class="game-info"><div class="game-rtp">RTP 95.8%</div><div class="game-name">Fire Kirin</div><button class="play-btn">Play Now</button></div>
+    </a>
+    <a href="https://t.me/onlinegamingslots" target="_blank" class="game-card">
+      <div class="game-img g4" style="background-image:url('orion.jpg');"><div class="game-icon">⭐</div></div>
+      <div class="game-info"><div class="game-rtp">RTP 96.2%</div><div class="game-name">Orion Stars</div><button class="play-btn">Play Now</button></div>
+    </a>
+    <a href="https://t.me/onlinegamingslots" target="_blank" class="game-card">
+      <div class="game-img g5" style="background-image:url('panda.jpg');"><div class="game-icon">🐼</div></div>
+      <div class="game-info"><div class="game-rtp">RTP 97.4%</div><div class="game-name">Panda Master</div><button class="play-btn">Play Now</button></div>
+    </a>
+    <a href="https://t.me/onlinegamingslots" target="_blank" class="game-card">
+      <div class="game-img g6" style="background-image:url('dragon.jpg');"><div class="game-icon">🐉</div></div>
+      <div class="hot-badge">NEW</div>
+      <div class="game-info"><div class="game-rtp">RTP 96.9%</div><div class="game-name">Blue Dragon</div><button class="play-btn">Play Now</button></div>
+    </a>
+    <a href="https://t.me/onlinegamingslots" target="_blank" class="game-card">
+      <div class="game-img g7" style="background-image:url('vegas.jpg');"><div class="game-icon">🎰</div></div>
+      <div class="game-info"><div class="game-rtp">RTP 95.5%</div><div class="game-name">Vegas Sweeps</div><button class="play-btn">Play Now</button></div>
+    </a>
+    <a href="https://t.me/onlinegamingslots" target="_blank" class="game-card">
+      <div class="game-img g8" style="background-image:url('vault.jpg');"><div class="game-icon">🔒</div></div>
+      <div class="game-info"><div class="game-rtp">RTP 96.0%</div><div class="game-name">Game Vault</div><button class="play-btn">Play Now</button></div>
+    </a>
+  </div>
+</section>
+ 
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-bg"></div>
+  <div style="position:relative;z-index:2;">
+    <div class="cta-eyebrow">Exclusive VIP Access</div>
+    <h2 class="cta-title">Ready to<br>Win Massive?</h2>
+    <p class="cta-sub">Join thousands of winners. Get freeplay codes, match bonuses &amp; instant 24/7 VIP support on Telegram.</p>
+    <a href="https://t.me/onlinegamingslots" target="_blank" class="cta-main">✈️ Claim VIP Bonus Now</a>
+  </div>
+</section>
+ 
+<footer>
+  © 2025 Online Gaming Slots &nbsp;|&nbsp; 18+ Only &nbsp;|&nbsp; Play Responsibly &nbsp;|&nbsp; T&amp;Cs Apply
+</footer>
+ 
+<script>
+/* ── Cursor ── */
+const cursor = document.getElementById('cursor');
+document.addEventListener('mousemove', e => { cursor.style.left=e.clientX+'px'; cursor.style.top=e.clientY+'px'; });
+document.querySelectorAll('button,a,.game-card,.banner-card').forEach(el => {
+  el.addEventListener('mouseenter', () => cursor.classList.add('big'));
+  el.addEventListener('mouseleave', () => cursor.classList.remove('big'));
+});
+ 
+/* ── Particles ── */
+const fxCanvas = document.getElementById('fx');
+const fxCtx = fxCanvas.getContext('2d');
+let W, H, particles = [];
+function resize(){ W=fxCanvas.width=window.innerWidth; H=fxCanvas.height=window.innerHeight; }
+window.addEventListener('resize', resize); resize();
+class P {
+  constructor(x,y,burst){
+    this.x=x+(Math.random()-.5)*20; this.y=y+(Math.random()-.5)*20;
+    this.r=Math.random()*2.5+.5; this.vx=(Math.random()-.5)*2; this.vy=(Math.random()-.5)*2-.6;
+    this.life=1; this.decay=burst?Math.random()*.04+.025:Math.random()*.008+.003;
+    const hues=[185,200,25,30,270]; this.hue=hues[Math.floor(Math.random()*hues.length)];
+  }
+  step(){ this.x+=this.vx; this.y+=this.vy; this.life-=this.decay; this.r-=.015; }
+  draw(){
+    fxCtx.beginPath(); fxCtx.arc(this.x,this.y,Math.max(0,this.r),0,Math.PI*2);
+    fxCtx.fillStyle=`hsl(${this.hue},100%,65%)`; fxCtx.globalAlpha=Math.max(0,this.life);
+    fxCtx.shadowBlur=12; fxCtx.shadowColor=`hsl(${this.hue},100%,65%)`; fxCtx.fill();
+    fxCtx.globalAlpha=1; fxCtx.shadowBlur=0;
+  }
+}
+document.addEventListener('mousemove', e => { for(let i=0;i<3;i++) particles.push(new P(e.clientX,e.clientY,true)); });
+setInterval(()=>{ if(particles.length<150) particles.push(new P(Math.random()*W,Math.random()*H,false)); },120);
+(function loop(){ fxCtx.clearRect(0,0,W,H); particles=particles.filter(p=>p.life>0&&p.r>0); particles.forEach(p=>{p.step();p.draw();}); requestAnimationFrame(loop); })();
+ 
+/* ── 3D Tilt ── */
+document.querySelectorAll('.game-card').forEach(card => {
+  card.addEventListener('mousemove', e => {
+    const r=card.getBoundingClientRect(),x=e.clientX-r.left,y=e.clientY-r.top;
+    card.style.transform=`perspective(900px) rotateX(${((y-r.height/2)/r.height)*-14}deg) rotateY(${((x-r.width/2)/r.width)*14}deg) scale(1.04)`;
+  });
+  card.addEventListener('mouseleave', () => { card.style.transform='perspective(900px) rotateX(0) rotateY(0) scale(1)'; });
+});
+ 
+/* ── Jackpot Counter ── */
+let jp=24942810.00;
+const jpEl=document.getElementById('jackpot');
+setInterval(()=>{ jp+=Math.random()*18+2; jpEl.textContent='$'+jp.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2}); },1800);
+ 
+/* ── Scroll Fade-In ── */
+const obs=new IntersectionObserver(entries=>{ entries.forEach(e=>{ if(e.isIntersecting){e.target.style.opacity='1';e.target.style.transform='translateY(0)';}});},{threshold:.1});
+document.querySelectorAll('.game-card,.banner-card,.jackpot-section,.cta-section,.spin-section').forEach(el=>{
+  el.style.opacity='0'; el.style.transform='translateY(30px)'; el.style.transition='opacity .6s ease, transform .6s ease'; obs.observe(el);
+});
+ 
+/* ── LUCKY SPIN WHEEL ── */
+const spinCanvas = document.getElementById('spinCanvas');
+const sc = spinCanvas.getContext('2d');
+ 
+const segments = [
+  { label:'$500 Free Play',    color:'#FF4500', emoji:'💰' },
+  { label:'100 Free Spins',    color:'#FFD700', emoji:'🎰' },
+  { label:'50% Dep. Match',    color:'#00E5FF', emoji:'💎' },
+  { label:'$100 Bonus Cash',   color:'#9B30FF', emoji:'💵' },
+  { label:'VIP Mystery Box',   color:'#FF0088', emoji:'🎁' },
+  { label:'25 Free Spins',     color:'#7ccc00', emoji:'🎡' },
+  { label:'$50 Free Play',     color:'#00b4db', emoji:'⚡' },
+  { label:'200% Welcome',      color:'#FF8C00', emoji:'🏆' },
+];
+ 
+const NUM = segments.length;
+const ARC = (Math.PI * 2) / NUM;
+let wheelAngle = 0;
+let spinning = false;
+ 
+function drawWheel(angle) {
+  const cx=160, cy=160, r=148;
+  sc.clearRect(0,0,320,320);
+  // Outer ring
+  sc.beginPath(); sc.arc(cx,cy,r+4,0,Math.PI*2);
+  sc.strokeStyle='rgba(0,229,255,0.4)'; sc.lineWidth=3; sc.stroke();
+ 
+  segments.forEach((seg,i) => {
+    const start=angle+i*ARC, end=start+ARC;
+    sc.beginPath(); sc.moveTo(cx,cy); sc.arc(cx,cy,r,start,end); sc.closePath();
+    sc.fillStyle=seg.color; sc.fill();
+    sc.strokeStyle='rgba(0,0,0,0.5)'; sc.lineWidth=2; sc.stroke();
+    // Label
+    sc.save(); sc.translate(cx,cy); sc.rotate(start+ARC/2); sc.textAlign='right';
+    sc.fillStyle='#fff'; sc.font='bold 10.5px "Barlow Condensed",sans-serif';
+    sc.shadowColor='rgba(0,0,0,0.9)'; sc.shadowBlur=5;
+    sc.fillText(seg.emoji+' '+seg.label, r-8, 4);
+    sc.restore();
+  });
+ 
+  // Center
+  sc.beginPath(); sc.arc(cx,cy,26,0,Math.PI*2);
+  const grad=sc.createRadialGradient(cx,cy,0,cx,cy,26);
+  grad.addColorStop(0,'#1a3a6a'); grad.addColorStop(1,'#020408');
+  sc.fillStyle=grad; sc.fill();
+  sc.strokeStyle='rgba(0,229,255,0.8)'; sc.lineWidth=2.5; sc.stroke();
+  sc.fillStyle='#00E5FF'; sc.font='bold 12px "Bebas Neue",sans-serif';
+  sc.textAlign='center'; sc.shadowBlur=0; sc.fillText('GO',cx,cy+5);
+}
+ 
+drawWheel(0);
+ 
+document.getElementById('spinBtn').addEventListener('click', function() {
+  if(spinning) return;
+  spinning=true; this.disabled=true; this.textContent='🌀 SPINNING...';
+ 
+  const winIndex = Math.floor(Math.random() * NUM);
+  const totalRotation = (Math.PI*2) * (10 + Math.floor(Math.random()*5));
+  // Pointer at top = -PI/2. We want slice winIndex centered under it.
+  const sliceMid = winIndex * ARC + ARC/2;
+  const target = totalRotation + (-Math.PI/2 - sliceMid - wheelAngle);
+  const finalAngle = wheelAngle + target + Math.PI*2*3; // extra safety spins
+ 
+  const duration = 5000;
+  const startTime = performance.now();
+  const startAngle = wheelAngle;
+  const delta = finalAngle - startAngle;
+ 
+  function easeOut(t){ return 1-Math.pow(1-t,4); }
+ 
+  const btn = this;
+  function animate(now){
+    const t = Math.min((now-startTime)/duration, 1);
+    wheelAngle = startAngle + delta * easeOut(t);
+    drawWheel(wheelAngle);
+    if(t < 1){ requestAnimationFrame(animate); }
+    else {
+      spinning=false;
+      const seg = segments[winIndex];
+      document.getElementById('modalEmoji').textContent=seg.emoji;
+      document.getElementById('modalPrize').textContent=seg.label;
+      document.getElementById('spinModal').classList.add('show');
+      btn.textContent='✅ Prize Claimed!';
+    }
+  }
+  requestAnimationFrame(animate);
+});
+</script>
+</body>
+</html>
+ 
+
             color: var(--text-main);
             overflow-x: hidden;
             line-height: 1.6;

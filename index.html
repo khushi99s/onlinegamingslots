@@ -64,7 +64,7 @@
         .carousel-track { display: flex; transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94); cursor: grab; user-select: none; }
         .carousel-track.dragging { transition: none; cursor: grabbing; }
         .game-card-banner { flex: 0 0 calc(100% / 5); min-width: 0; padding: 8px; text-align: center; }
-        .game-thumb { width: 100%; aspect-ratio: 4/3; border-radius: 12px; overflow: hidden; position: relative; border: 2px solid rgba(255, 215, 0, 0.3); transition: all 0.5s ease; cursor: pointer; box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4); display: flex; align-items: center; justify-content: center; font-size: 2.5rem; background-size: cover; background-position: center; }
+        .game-thumb { width: 100%; aspect-ratio: 4/3; border-radius: 12px; overflow: hidden; position: relative; border: 2px solid rgba(255, 215, 0, 0.3); transition: all 0.5s ease; cursor: pointer; box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4); display: flex; align-items: center; justify-content: center; font-size: 2.5rem; background-size: contain; background-position: center; background-repeat: no-repeat; background-color: #050505; }
         .game-thumb::before { content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%; background: linear-gradient(to right, transparent, rgba(255,255,255,0.6), transparent); transform: skewX(-25deg); transition: all 0.6s ease; z-index: 5; pointer-events: none; }
         .game-card-banner:hover .game-thumb::before { left: 200%; }
         .game-card-banner:hover .game-thumb { transform: scale(1.1); border-color: #FFD700; box-shadow: 0 0 30px rgba(255, 215, 0, 0.8), 0 0 15px rgba(0, 229, 255, 0.5); filter: brightness(1.2); }
@@ -158,9 +158,9 @@
         .game-card-grid::before { content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%; background: linear-gradient(to right, transparent, rgba(255,255,255,0.3), transparent); transform: skewX(-25deg); transition: all 0.8s ease; z-index: 10; pointer-events: none; }
         .game-card-grid:hover { transform: translateY(-15px) scale(1.05) !important; box-shadow: 0 20px 50px rgba(0,229,255,0.6), 0 0 30px rgba(255,215,0,0.4); border-color: #00E5FF; }
         .game-card-grid:hover::before { left: 200%; }
-        .thumbnail { height: 160px; width: 100%; display: flex; align-items: center; justify-content: center; position: relative; background-size: 100% 100%; background-repeat: no-repeat; transition: transform 0.4s ease; border-bottom: 2px solid rgba(0,0,0,0.8); }
+        .thumbnail { height: 180px; width: 100%; display: flex; align-items: center; justify-content: center; position: relative; background-size: contain; background-position: center; background-repeat: no-repeat; background-color: #050505; transition: transform 0.4s ease; border-bottom: 2px solid rgba(255,215,0,0.3); }
         .game-card-grid:hover .thumbnail { transform: scale(1.1); }
-        .thumbnail::after { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(to bottom, transparent 60%, rgba(10,10,15,0.95) 100%); pointer-events: none; }
+        .thumbnail::after { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(to bottom, transparent 30%, rgba(10,10,15,0.95) 100%); pointer-events: none; }
         .card-details { padding: 25px 20px; text-align: center; background: #111116; position: relative; z-index: 2; }
         .game-title { font-family: 'Montserrat', sans-serif; font-weight: 900; margin-bottom: 5px; display: block; font-size: 1.4rem; text-transform: uppercase; color: #fff; text-shadow: 0 0 10px rgba(255, 255, 255, 0.5); letter-spacing: 1px; }
         .provider { font-size: 0.8rem; display: inline-block; font-weight: 700; padding: 5px 15px; border-radius: 30px; background: rgba(255,255,255,0.1); margin-bottom: 15px; color: #FFF; text-transform: uppercase; letter-spacing: 1.5px; }
@@ -254,6 +254,12 @@
         <img src="logo.png" alt="Online Gaming Slots Logo" class="main-logo" onerror="this.style.display='none'; document.getElementById('text-fallback-logo').style.display='inline-block';">
         <h1 class="logo" id="text-fallback-logo" style="display: none;">ONLINE GAMING<span>SLOTS</span></h1>
     </header>
+
+    <!-- Main Promotional Banner -->
+    <div style="width: 100%; max-width: 1100px; margin: 25px auto; text-align: center; position: relative; z-index: 10;">
+        <img src="banner.png" alt="Promotional Banner" style="width: 95%; max-height: 250px; object-fit: contain; border-radius: 20px; box-shadow: 0 15px 40px rgba(0,229,255,0.3); border: 2px solid rgba(0,229,255,0.5); animation: floatBanner 4s ease-in-out infinite;" onerror="this.src='banner.jpg'; this.onerror=function(){this.style.display='none';};">
+        <style>@keyframes floatBanner { 0%, 100% { transform: translateY(0); box-shadow: 0 15px 40px rgba(0,229,255,0.3); } 50% { transform: translateY(-8px); box-shadow: 0 25px 50px rgba(0,229,255,0.5); } }</style>
+    </div>
 
     <!-- === GOLDEN JACKPOT BANNER === -->
     <div class="jackpot-banner-wrapper">
@@ -754,8 +760,12 @@
             reel2.classList.remove('win'); 
             reel3.classList.remove('win');
             
-            // Randomly select one of the 3 outcomes
-            const result = outcomes[Math.floor(Math.random() * outcomes.length)];
+            // Premium High-Win Rate Logic: 45% Bonus, 45% Freeplay, 10% Lose
+            const rand = Math.random();
+            let result;
+            if (rand <= 0.45) result = outcomes[0]; // Bonus
+            else if (rand <= 0.90) result = outcomes[1]; // Freeplay
+            else result = outcomes[2]; // Lose
             
             // Set all reels to show the result emoji
             setTimeout(() => { 

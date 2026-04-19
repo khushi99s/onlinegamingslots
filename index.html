@@ -147,7 +147,7 @@ nav a:hover{color:var(--cyan);}
 @media(max-width:767px){.spin-info{text-align:center;}}
 .spin-info h3{font-family:'Bebas Neue',sans-serif;font-size:3rem;letter-spacing:2px;background:linear-gradient(90deg,var(--gold),var(--amber));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:.8rem;}
 .spin-info p{color:var(--muted);font-size:1.05rem;font-weight:600;margin-bottom:1.5rem;line-height:1.7;}
-.spin-prizes{display:flex;flex-direction:column;gap:.5rem;margin-bottom:1.8rem;}
+.spin-prizes{display:none;flex-direction:column;gap:.5rem;margin-bottom:1.8rem;}
 .spin-prize-row{display:flex;align-items:center;gap:.8rem;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:1rem;letter-spacing:1px;}
 .prize-dot{width:12px;height:12px;border-radius:50%;flex-shrink:0;}
 .spin-btn{
@@ -288,6 +288,17 @@ footer{position:relative;z-index:2;text-align:center;padding:2rem;border-top:1px
 <div id="cursor"></div>
 <canvas id="fx"></canvas>
 <div class="grid-bg"></div>
+
+<!-- SOUND EFFECTS -->
+<audio id="spinSound" preload="auto">
+  <source src="data:audio/wav;base64,UklGRiYAAABXQVZFZm10IBAAAAABAAEAQB8AAAB9AAACABAAZGF0YQIAAAAAAA==" type="audio/wav">
+</audio>
+<audio id="winSound" preload="auto">
+  <source src="data:audio/wav;base64,UklGRiYAAABXQVZFZm10IBAAAAABAAEAQB8AAAB9AAACABAAZGF0YQIAAAAAAA==" type="audio/wav">
+</audio>
+<audio id="clickSound" preload="auto">
+  <source src="data:audio/wav;base64,UklGRiYAAABXQVZFZm10IBAAAAABAAEAQB8AAAB9AAACABAAZGF0YQIAAAAAAA==" type="audio/wav">
+</audio>
  
 <!-- SPIN MODAL -->
 <div class="spin-modal" id="spinModal">
@@ -373,11 +384,11 @@ footer{position:relative;z-index:2;text-align:center;padding:2rem;border-top:1px
       <h3>Spin &amp; Win Big!</h3>
       <p>One free spin per visit. Land on a prize and claim it instantly via our Telegram VIP channel — 24/7 support ready!</p>
       <div class="spin-prizes">
-        <div class="spin-prize-row"><div class="prize-dot" style="background:#FFD700;"></div><span>100% Bonus (Highest Chance)</span></div>
-        <div class="spin-prize-row"><div class="prize-dot" style="background:#00E5FF;"></div><span>Freeplay (Second Chance)</span></div>
-        <div class="spin-prize-row"><div class="prize-dot" style="background:#FF8C00;"></div><span>30% Regular Bonus</span></div>
+        <div class="spin-prize-row"><div class="prize-dot" style="background:#FFD700;"></div><span>100% Signup Bonus (Highest Chance)</span></div>
+        <div class="spin-prize-row"><div class="prize-dot" style="background:#00E5FF;"></div><span>2100% Bonus + Freeplay (High)</span></div>
+        <div class="spin-prize-row"><div class="prize-dot" style="background:#FF8C00;"></div><span>100% Bonus</span></div>
         <div class="spin-prize-row"><div class="prize-dot" style="background:#ff4d4d;"></div><span>200% Bonus + $500 (Rare)</span></div>
-        <div class="spin-prize-row"><div class="prize-dot" style="background:#6c757d;"></div><span>Better Luck Next Time</span></div>
+        <div class="spin-prize-row"><div class="prize-dot" style="background:#7cff00;"></div><span>Freeplay</span></div>
       </div>
       <button class="spin-btn" id="spinBtn">🎡 SPIN NOW</button>
     </div>
@@ -543,16 +554,16 @@ const spinCanvas = document.getElementById('spinCanvas');
 const sc = spinCanvas.getContext('2d');
  
 const segments = [
-  { label:'100% Bonus',            color:'#FFD700', emoji:'🏆' },
-  { label:'100% Bonus',            color:'#f2c94c', emoji:'🏆' },
-  { label:'100% Bonus',            color:'#f8d66d', emoji:'🏆' },
-  { label:'100% Bonus',            color:'#e6b800', emoji:'🏆' },
-  { label:'Freeplay',              color:'#00E5FF', emoji:'🎁' },
-  { label:'Freeplay',              color:'#00b4db', emoji:'🎁' },
-  { label:'30% Regular Bonus',     color:'#FF8C00', emoji:'💸' },
+  { label:'100% Signup Bonus',    color:'#FFD700', emoji:'🎊' },
+  { label:'100% Signup Bonus',    color:'#f2c94c', emoji:'🎊' },
+  { label:'100% Signup Bonus',    color:'#f8d66d', emoji:'🎊' },
+  { label:'100% Signup Bonus',    color:'#e6b800', emoji:'🎊' },
+  { label:'2100% Bonus + Freeplay', color:'#00E5FF', emoji:'🎁' },
+  { label:'2100% Bonus + Freeplay', color:'#00b4db', emoji:'🎁' },
+  { label:'100% Bonus',            color:'#FF8C00', emoji:'🏆' },
   { label:'200% Bonus + $500',     color:'#ff4d4d', emoji:'💥' },
-  { label:'Better Luck Next Time', color:'#6c757d', emoji:'🍀' },
-  { label:'Better Luck Next Time', color:'#7f8c8d', emoji:'🍀' },
+  { label:'Freeplay',              color:'#7cff00', emoji:'🎲' },
+  { label:'Freeplay',              color:'#5ade4d', emoji:'🎲' },
 ];
  
 const NUM = segments.length;
@@ -595,27 +606,33 @@ drawWheel(0);
 document.getElementById('spinBtn').addEventListener('click', function() {
   if(spinning) return;
   spinning=true; this.disabled=true; this.textContent='🌀 SPINNING...';
+  // Start click and continuous rotating sound
+  playClickTap();
+  startSpinTick();
  
-  // Force non-winning outcome on every spin.
-  const nonWinningIndexes = segments
+  // Force winning outcome - most likely 100% Signup Bonus or 2100% Bonus + Freeplay
+  const winningIndexes = segments
     .map((seg, index) => ({ seg, index }))
-    .filter(item => item.seg.label === 'Better Luck Next Time')
+    .filter(item => 
+      item.seg.label === '100% Signup Bonus' || 
+      item.seg.label === '2100% Bonus + Freeplay'
+    )
     .map(item => item.index);
-  const winIndex = nonWinningIndexes.length
-    ? nonWinningIndexes[Math.floor(Math.random() * nonWinningIndexes.length)]
-    : NUM - 1;
+  const winIndex = winningIndexes.length
+    ? winningIndexes[Math.floor(Math.random() * winningIndexes.length)]
+    : 0;
   const totalRotation = (Math.PI*2) * (10 + Math.floor(Math.random()*5));
   // Pointer at top = -PI/2. We want slice winIndex centered under it.
   const sliceMid = winIndex * ARC + ARC/2;
   const target = totalRotation + (-Math.PI/2 - sliceMid - wheelAngle);
   const finalAngle = wheelAngle + target + Math.PI*2*3; // extra safety spins
  
-  const duration = 5000;
+  const duration = 6500;
   const startTime = performance.now();
   const startAngle = wheelAngle;
   const delta = finalAngle - startAngle;
  
-  function easeOut(t){ return 1-Math.pow(1-t,4); }
+  function easeOut(t){ return 1-Math.pow(1-t,3); }
  
   const btn = this;
   function animate(now){
@@ -625,20 +642,92 @@ document.getElementById('spinBtn').addEventListener('click', function() {
     if(t < 1){ requestAnimationFrame(animate); }
     else {
       spinning=false;
+      stopSpinTick();
       const seg = segments[winIndex];
       const modalTitleEl = document.querySelector('.modal-title');
       if (modalTitleEl) {
-        modalTitleEl.textContent = seg.label === 'Better Luck Next Time' ? 'Try Again' : 'You Won!';
+        modalTitleEl.textContent = seg.label.includes('2100%') ? '🎉 YOU WON BIG!' : '✨ Great Prize!';
       }
       document.getElementById('modalEmoji').textContent=seg.emoji;
       document.getElementById('modalPrize').textContent=seg.label;
       document.getElementById('spinModal').classList.add('show');
+      // Fast hurray sound on win
+      playWinHurray();
       btn.textContent='🎡 SPIN NOW';
       btn.disabled = false;
+      // Auto-close modal after 4 seconds and return to wheel
+      setTimeout(() => {
+        document.getElementById('spinModal').classList.remove('show');
+      }, 4000);
     }
   }
   requestAnimationFrame(animate);
 });
+
+/* ── Sound Effects Generator ── */
+let sfxCtx = null;
+let spinTickTimer = null;
+
+function getSfxCtx() {
+  if (!sfxCtx) {
+    const Ctx = window.AudioContext || window.webkitAudioContext;
+    if (!Ctx) return null;
+    sfxCtx = new Ctx();
+  }
+  if (sfxCtx.state === 'suspended') {
+    sfxCtx.resume().catch(() => {});
+  }
+  return sfxCtx;
+}
+
+function generateBeep(frequency, duration, type = 'sine', volume = 0.2) {
+  const ctx = getSfxCtx();
+  if (!ctx) return;
+
+  const oscillator = ctx.createOscillator();
+  const gainNode = ctx.createGain();
+  oscillator.connect(gainNode);
+  gainNode.connect(ctx.destination);
+
+  oscillator.frequency.value = frequency;
+  oscillator.type = type;
+  gainNode.gain.setValueAtTime(volume, ctx.currentTime);
+  gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + duration);
+
+  oscillator.start(ctx.currentTime);
+  oscillator.stop(ctx.currentTime + duration);
+}
+
+function playClickTap() {
+  generateBeep(760, 0.07, 'triangle', 0.16);
+}
+
+function startSpinTick() {
+  stopSpinTick();
+  let tick = 0;
+  spinTickTimer = setInterval(() => {
+    // Alternating short ticks to mimic wheel rotation clicks.
+    const freq = tick % 2 === 0 ? 500 : 620;
+    generateBeep(freq, 0.045, 'square', 0.08);
+    tick += 1;
+  }, 85);
+}
+
+function stopSpinTick() {
+  if (spinTickTimer) {
+    clearInterval(spinTickTimer);
+    spinTickTimer = null;
+  }
+}
+
+function playWinHurray() {
+  const notes = [880, 988, 1175, 1319, 1568];
+  notes.forEach((note, i) => {
+    setTimeout(() => {
+      generateBeep(note, 0.12, 'triangle', 0.22);
+    }, i * 90);
+  });
+}
 </script>
 </body>
 </html>

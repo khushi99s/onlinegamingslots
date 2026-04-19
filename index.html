@@ -35,6 +35,9 @@
 
         /* === HEADER === */
         header { width: 100%; padding: 30px 20px; text-align: center; background: linear-gradient(180deg, rgba(26, 11, 46, 0.8) 0%, transparent 100%); position: relative; z-index: 10; }
+        .main-logo { max-width: 220px; height: auto; display: inline-block; filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.6)); animation: logoPulseObj 4s ease-in-out infinite; cursor: pointer; transition: all 0.3s; }
+        .main-logo:hover { transform: scale(1.1); filter: drop-shadow(0 0 30px rgba(255, 215, 0, 1)); }
+        @keyframes logoPulseObj { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); filter: drop-shadow(0 0 40px rgba(255, 215, 0, 0.9)); } }
         .logo { font-family: 'Montserrat', sans-serif; font-size: 2.8rem; font-weight: 900; text-transform: uppercase; background: linear-gradient(135deg, #FFD700 0%, #F50057 50%, #FF6D00 100%); background-size: 200% 200%; -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: logoShine 4s ease infinite; filter: drop-shadow(0 0 30px rgba(245, 0, 87, 0.6)); display: inline-block; letter-spacing: 2px; line-height: 1.2; }
         .logo span { display: block; font-size: 1.8rem; letter-spacing: 5px; }
         @keyframes logoShine { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
@@ -105,6 +108,8 @@
         @keyframes winPopIn { 0% { transform: scale(0) rotate(-10deg); } 50% { transform: scale(1.1) rotate(5deg); } 100% { transform: scale(1) rotate(0deg); } }
         .win-content::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: linear-gradient(45deg, transparent, rgba(255,255,255,0.3), transparent); animation: modalShine 2s infinite; }
         @keyframes modalShine { 0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); } 100% { transform: translateX(100%) translateY(100%) rotate(45deg); } }
+        .close-modal-btn { position: absolute; top: 15px; right: 25px; font-size: 2.5rem; color: rgba(255,255,255,0.7); cursor: pointer; transition: all 0.3s; z-index: 20; font-family: sans-serif; line-height: 1; text-shadow: none; }
+        .close-modal-btn:hover { color: white; transform: rotate(90deg) scale(1.2); text-shadow: 0 0 15px rgba(255,255,255,0.8); }
         .win-emoji { font-size: 5rem; animation: emojiBounce 1s ease infinite; display: block; margin-bottom: 15px; position: relative; z-index: 1; filter: drop-shadow(0 0 20px rgba(255,214,0,0.8)); }
         @keyframes emojiBounce { 0%, 100% { transform: translateY(0) scale(1); } 50% { transform: translateY(-30px) scale(1.2); } }
         .win-title { font-family: 'Montserrat', sans-serif; font-size: 2.8rem; font-weight: 900; color: var(--gold); text-shadow: 0 0 20px rgba(0,0,0,0.5), 3px 3px 6px rgba(0,0,0,0.3); margin-bottom: 10px; position: relative; z-index: 1; animation: textGlow 1.5s ease-in-out infinite; }
@@ -143,7 +148,7 @@
         .game-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 25px; width: 90%; max-width: 1200px; padding: 40px 20px; margin: 0 auto; position: relative; z-index: 10; }
         .game-card-grid { background: linear-gradient(135deg, #1e1e24 0%, #2d2d3a 100%); border-radius: 20px; overflow: hidden; transition: all 0.5s; display: flex; flex-direction: column; border: 2px solid rgba(255,255,255,0.08); cursor: pointer; box-shadow: 0 5px 20px rgba(0,0,0,0.3); }
         .game-card-grid:hover { transform: translateY(-12px) scale(1.02); box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
-        .thumbnail { height: 160px; width: 100%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 1.4rem; color: white; text-shadow: 2px 2px 8px rgba(0,0,0,0.6); position: relative; font-family: 'Montserrat', sans-serif; }
+        .thumbnail { height: 160px; width: 100%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 1.4rem; color: white; text-shadow: 2px 2px 8px rgba(0,0,0,0.6); position: relative; font-family: 'Montserrat', sans-serif; background-size: cover; background-position: center; }
         .card-details { padding: 20px; text-align: center; background: linear-gradient(180deg, #1e1e24 0%, #15151a 100%); }
         .game-title { font-family: 'Montserrat', sans-serif; font-weight: 800; margin-bottom: 10px; display: block; font-size: 1.2rem; text-transform: uppercase; }
         .provider { font-size: 0.9rem; display: inline-block; font-weight: 600; padding: 6px 18px; border-radius: 20px; background: rgba(255,255,255,0.1); margin-bottom: 12px; }
@@ -186,13 +191,14 @@
         .cat-new { background: linear-gradient(135deg, var(--cyan), var(--electric-blue)); color: #000; }
 
         /* Game thumb colors for carousel */
-        .thumb-mines { background: linear-gradient(135deg, #FF6B35, #FFD700); }
-        .thumb-super { background: linear-gradient(135deg, #FF0000, #FFD700); }
-        .thumb-regal { background: linear-gradient(135deg, #9333EA, #F59E0B); }
-        .thumb-crystal { background: linear-gradient(135deg, #06B6D4, #F59E0B); }
-        .thumb-book { background: linear-gradient(135deg, #1E40AF, #F59E0B); }
+        .thumb-juwa { background: linear-gradient(135deg, #FF6B35, #FFD700); }
+        .thumb-firekirin { background: linear-gradient(135deg, #FF0000, #FFD700); }
+        .thumb-orion { background: linear-gradient(135deg, #9333EA, #F59E0B); }
+        .thumb-panda { background: linear-gradient(135deg, #06B6D4, #F59E0B); }
+        .thumb-cash { background: linear-gradient(135deg, #1E40AF, #F59E0B); }
 
         @media (max-width: 768px) {
+            .main-logo { max-width: 170px; }
             .logo { font-size: 2rem; }
             .logo span { font-size: 1.4rem; }
             .reel { width: 70px; height: 90px; font-size: 3rem; }
@@ -226,7 +232,8 @@
 
     <!-- Header -->
     <header>
-        <h1 class="logo">ONLINE GAMING<span>SLOTS</span></h1>
+        <img src="logo.png" alt="Online Gaming Slots Logo" class="main-logo" onerror="this.style.display='none'; document.getElementById('text-fallback-logo').style.display='inline-block';">
+        <h1 class="logo" id="text-fallback-logo" style="display: none;">ONLINE GAMING<span>SLOTS</span></h1>
     </header>
 
     <!-- === GOLDEN JACKPOT BANNER === -->
@@ -240,11 +247,88 @@
             <div class="carousel-wrapper">
                 <div class="carousel-container">
                     <div class="carousel-track" id="carouselTrack">
-                        <div class="game-card-banner"><div class="game-thumb thumb-mines">💣<span class="game-badge badge-jackpot">Jackpot</span></div><div class="game-name">Jackpot Mines</div></div>
-                        <div class="game-card-banner"><div class="game-thumb thumb-super">7️⃣<span class="game-badge badge-jackpot">Jackpot</span></div><div class="game-name">20 Super Hot</div></div>
-                        <div class="game-card-banner"><div class="game-thumb thumb-regal">👑<span class="game-badge badge-bonus">Bonus</span></div><div class="game-name">Regal Spins 20</div></div>
-                        <div class="game-card-banner"><div class="game-thumb thumb-crystal">💎<span class="game-badge badge-jackpot">Jackpot</span></div><div class="game-name">Crystal Hot 80</div></div>
-                        <div class="game-card-banner"><div class="game-thumb thumb-book">📖<span class="game-badge badge-bonus">Bonus</span></div><div class="game-name">Book Of Shining</div></div>
+                        <!-- Juwa777 -->
+                        <div class="game-card-banner" onclick="sendTelegramMessage('juwa777', 'Juwa777')">
+                            <div class="game-thumb thumb-juwa">
+                                🎰
+                                <span class="game-badge badge-jackpot">Jackpot</span>
+                            </div>
+                            <div class="game-name">Juwa777</div>
+                        </div>
+                        <!-- Fire Kirin -->
+                        <div class="game-card-banner" onclick="sendTelegramMessage('firekirin', 'Fire Kirin')">
+                            <div class="game-thumb thumb-firekirin">
+                                🐉
+                                <span class="game-badge badge-jackpot">Jackpot</span>
+                            </div>
+                            <div class="game-name">Fire Kirin</div>
+                        </div>
+                        <!-- Orion Stars -->
+                        <div class="game-card-banner" onclick="sendTelegramMessage('orionstars', 'Orion Stars')">
+                            <div class="game-thumb thumb-orion">
+                                ⭐
+                                <span class="game-badge badge-bonus">Bonus</span>
+                            </div>
+                            <div class="game-name">Orion Stars</div>
+                        </div>
+                        <!-- Panda Master -->
+                        <div class="game-card-banner" onclick="sendTelegramMessage('pandamaster', 'Panda Master')">
+                            <div class="game-thumb thumb-panda">
+                                🐼
+                                <span class="game-badge badge-jackpot">Jackpot</span>
+                            </div>
+                            <div class="game-name">Panda Master</div>
+                        </div>
+                        <!-- Cash Machine -->
+                        <div class="game-card-banner" onclick="sendTelegramMessage('cashmachine', 'Cash Machine')">
+                            <div class="game-thumb thumb-cash">
+                                💵
+                                <span class="game-badge badge-bonus">Bonus</span>
+                            </div>
+                            <div class="game-name">Cash Machine</div>
+                        </div>
+                        
+                        <!-- Duplicated for infinite scroll effect -->
+                        <!-- Juwa777 -->
+                        <div class="game-card-banner" onclick="sendTelegramMessage('juwa777', 'Juwa777')">
+                            <div class="game-thumb thumb-juwa">
+                                🎰
+                                <span class="game-badge badge-jackpot">Jackpot</span>
+                            </div>
+                            <div class="game-name">Juwa777</div>
+                        </div>
+                        <!-- Fire Kirin -->
+                        <div class="game-card-banner" onclick="sendTelegramMessage('firekirin', 'Fire Kirin')">
+                            <div class="game-thumb thumb-firekirin">
+                                🐉
+                                <span class="game-badge badge-jackpot">Jackpot</span>
+                            </div>
+                            <div class="game-name">Fire Kirin</div>
+                        </div>
+                        <!-- Orion Stars -->
+                        <div class="game-card-banner" onclick="sendTelegramMessage('orionstars', 'Orion Stars')">
+                            <div class="game-thumb thumb-orion">
+                                ⭐
+                                <span class="game-badge badge-bonus">Bonus</span>
+                            </div>
+                            <div class="game-name">Orion Stars</div>
+                        </div>
+                        <!-- Panda Master -->
+                        <div class="game-card-banner" onclick="sendTelegramMessage('pandamaster', 'Panda Master')">
+                            <div class="game-thumb thumb-panda">
+                                🐼
+                                <span class="game-badge badge-jackpot">Jackpot</span>
+                            </div>
+                            <div class="game-name">Panda Master</div>
+                        </div>
+                        <!-- Cash Machine -->
+                        <div class="game-card-banner" onclick="sendTelegramMessage('cashmachine', 'Cash Machine')">
+                            <div class="game-thumb thumb-cash">
+                                💵
+                                <span class="game-badge badge-bonus">Bonus</span>
+                            </div>
+                            <div class="game-name">Cash Machine</div>
+                        </div>
                     </div>
                 </div>
                 <div class="carousel-nav" id="carouselNav"></div>
@@ -267,9 +351,9 @@
                 <div class="slot-title">🎰 SPIN TO WIN 🎰</div>
             </div>
             <div class="reels-container">
-                <div class="reel" id="reel1">7️⃣</div>
-                <div class="reel" id="reel2">7️⃣</div>
-                <div class="reel" id="reel3">7️⃣</div>
+                <div class="reel" id="reel1">💰</div>
+                <div class="reel" id="reel2">💰</div>
+                <div class="reel" id="reel3">💰</div>
             </div>
             <button class="spin-button" id="spinBtn" onclick="spinSlots()">🎲 SPIN NOW 🎲</button>
         </div>
@@ -278,10 +362,11 @@
     <!-- WIN MODAL -->
     <div class="win-modal" id="winModal">
         <div class="win-content">
+            <span class="close-modal-btn" onclick="document.getElementById('winModal').style.display='none'">×</span>
             <span class="win-emoji">💃</span>
-            <h1 class="win-title">YOU WON!</h1>
-            <p class="win-subtitle">100% SIGNUP BONUS CLAIMED!</p>
-            <div class="win-slogan">THAT'S HOW WE ALL DO IT! 🔥</div>
+            <h1 class="win-title" id="winTitle">YOU WON!</h1>
+            <p class="win-subtitle" id="winSubtitle">100% SIGNUP BONUS CLAIMED!</p>
+            <div class="win-slogan" id="winSlogan">THAT'S HOW WE ALL DO IT! 🔥</div>
             <button class="claim-win-btn" onclick="claimBonus()">CLAIM REWARD →</button>
         </div>
     </div>
@@ -305,25 +390,156 @@
     <div class="bonus-banner">
         <div class="bonus-title">🎁 $5 FREEPLAY + 100% BONUS 🎁</div>
         <div class="bonus-subtitle">Register now and get DOUBLE your first deposit + $5 free!</div>
-        <a href="https://t.me/yourtelegramgroup" target="_blank" style="text-decoration: none;">
+        <a href="https://t.me/onlinegamingslots" target="_blank" style="text-decoration: none;">
             <button class="bonus-cta">CLAIM NOW →</button>
         </a>
     </div>
 
     <!-- Game Grid -->
     <div class="game-grid">
-        <div class="game-card-grid card-purple" onclick="sendTelegramMessage('juwa777', 'Juwa777')"><div class="thumbnail">🎰 JUWA</div><div class="card-details"><span class="game-title">Juwa777</span><span class="provider">Juwa Games</span><br><button class="claim-btn">GET FREEPLAY</button></div></div>
-        <div class="game-card-grid card-green" onclick="sendTelegramMessage('orionstars', 'Orion Stars')"><div class="thumbnail">⭐ ORION</div><div class="card-details"><span class="game-title">Orion Stars</span><span class="provider">Orion Games</span><br><button class="claim-btn">GET FREEPLAY</button></div></div>
-        <div class="game-card-grid card-red" onclick="sendTelegramMessage('firekirin', 'Fire Kirin')"><div class="thumbnail">🐉 KIRIN</div><div class="card-details"><span class="game-title">Fire Kirin</span><span class="provider">Kirin Games</span><br><button class="claim-btn">GET FREEPLAY</button></div></div>
-        <div class="game-card-grid card-blue" onclick="sendTelegramMessage('pandamaster', 'Panda Master')"><div class="thumbnail">🐼 PANDA</div><div class="card-details"><span class="game-title">Panda Master</span><span class="provider">Panda Games</span><br><button class="claim-btn">GET FREEPLAY</button></div></div>
-        <div class="game-card-grid card-gold" onclick="sendTelegramMessage('cashmachine', 'Cash Machine')"><div class="thumbnail">💵 CASH</div><div class="card-details"><span class="game-title">Cash Machine</span><span class="provider">Cash Games</span><br><button class="claim-btn">GET FREEPLAY</button></div></div>
-        <div class="game-card-grid card-pink" onclick="sendTelegramMessage('mafia', 'Mafia')"><div class="thumbnail">🎲 MAFIA</div><div class="card-details"><span class="game-title">Mafia</span><span class="provider">Mafia Games</span><br><button class="claim-btn">GET FREEPLAY</button></div></div>
-        <div class="game-card-grid card-cyan" onclick="sendTelegramMessage('gamevault', 'Game Vault')"><div class="thumbnail">🔐 VAULT</div><div class="card-details"><span class="game-title">Game Vault</span><span class="provider">Vault Games</span><br><button class="claim-btn">GET FREEPLAY</button></div></div>
-        <div class="game-card-grid card-yellow" onclick="sendTelegramMessage('vegassweeps', 'Vegas Sweeps')"><div class="thumbnail">🎰 VEGAS</div><div class="card-details"><span class="game-title">Vegas Sweeps</span><span class="provider">Vegas Games</span><br><button class="claim-btn">GET FREEPLAY</button></div></div>
-        <div class="game-card-grid card-electric" onclick="sendTelegramMessage('bluedragon', 'Blue Dragon')"><div class="thumbnail">🐉 DRAGON</div><div class="card-details"><span class="game-title">Blue Dragon</span><span class="provider">Dragon Games</span><br><button class="claim-btn">GET FREEPLAY</button></div></div>
-        <div class="game-card-grid card-orange" onclick="sendTelegramMessage('mrallinone', 'Mr All in One')"><div class="thumbnail">🎯 ALL IN</div><div class="card-details"><span class="game-title">Mr All in One</span><span class="provider">All-in Games</span><br><button class="claim-btn">GET FREEPLAY</button></div></div>
-        <div class="game-card-grid card-dark" onclick="sendTelegramMessage('highstakes', 'Highstakes')"><div class="thumbnail">💎 HIGH</div><div class="card-details"><span class="game-title">Highstakes</span><span class="provider">High Roller</span><br><button class="claim-btn">GET FREEPLAY</button></div></div>
-        <div class="game-card-grid card-teal" onclick="sendTelegramMessage('rivermonster', 'River Monster')"><div class="thumbnail">🦈 MONSTER</div><div class="card-details"><span class="game-title">River Monster</span><span class="provider">River Games</span><br><button class="claim-btn">GET FREEPLAY</button></div></div>
+        <!-- Juwa777 -->
+        <div class="game-card-grid card-purple" onclick="sendTelegramMessage('juwa777', 'Juwa777')">
+            <div class="thumbnail" style="background-image: url('juwa.jpg'); background-size: cover; background-position: center;">
+                <span style="background: rgba(0,0,0,0.6); padding: 5px 15px; border-radius: 10px; font-weight: bold;">JUWA</span>
+            </div>
+            <div class="card-details">
+                <span class="game-title">Juwa777</span>
+                <span class="provider">Juwa Games</span>
+                <br><button class="claim-btn">GET FREEPLAY</button>
+            </div>
+        </div>
+
+        <!-- Orion Stars -->
+        <div class="game-card-grid card-green" onclick="sendTelegramMessage('orionstars', 'Orion Stars')">
+            <div class="thumbnail" style="background-image: url('orion.jpg'); background-size: cover; background-position: center;">
+                <span style="background: rgba(0,0,0,0.6); padding: 5px 15px; border-radius: 10px; font-weight: bold;">ORION</span>
+            </div>
+            <div class="card-details">
+                <span class="game-title">Orion Stars</span>
+                <span class="provider">Orion Games</span>
+                <br><button class="claim-btn">GET FREEPLAY</button>
+            </div>
+        </div>
+
+        <!-- Fire Kirin -->
+        <div class="game-card-grid card-red" onclick="sendTelegramMessage('firekirin', 'Fire Kirin')">
+            <div class="thumbnail" style="background-image: url('firekirin.jpg'); background-size: cover; background-position: center;">
+                <span style="background: rgba(0,0,0,0.6); padding: 5px 15px; border-radius: 10px; font-weight: bold;">KIRIN</span>
+            </div>
+            <div class="card-details">
+                <span class="game-title">Fire Kirin</span>
+                <span class="provider">Kirin Games</span>
+                <br><button class="claim-btn">GET FREEPLAY</button>
+            </div>
+        </div>
+
+        <!-- Panda Master -->
+        <div class="game-card-grid card-blue" onclick="sendTelegramMessage('pandamaster', 'Panda Master')">
+            <div class="thumbnail" style="background-image: url('panda.jpg'); background-size: cover; background-position: center;">
+                <span style="background: rgba(0,0,0,0.6); padding: 5px 15px; border-radius: 10px; font-weight: bold;">PANDA</span>
+            </div>
+            <div class="card-details">
+                <span class="game-title">Panda Master</span>
+                <span class="provider">Panda Games</span>
+                <br><button class="claim-btn">GET FREEPLAY</button>
+            </div>
+        </div>
+
+        <!-- Cash Machine -->
+        <div class="game-card-grid card-gold" onclick="sendTelegramMessage('cashmachine', 'Cash Machine')">
+            <div class="thumbnail" style="background-image: url('cash.jpg'); background-size: cover; background-position: center;">
+                <span style="background: rgba(0,0,0,0.6); padding: 5px 15px; border-radius: 10px; font-weight: bold;">CASH</span>
+            </div>
+            <div class="card-details">
+                <span class="game-title">Cash Machine</span>
+                <span class="provider">Cash Games</span>
+                <br><button class="claim-btn">GET FREEPLAY</button>
+            </div>
+        </div>
+
+        <!-- Mafia -->
+        <div class="game-card-grid card-pink" onclick="sendTelegramMessage('mafia', 'Mafia')">
+            <div class="thumbnail" style="background-image: url('mafia.jpg'); background-size: cover; background-position: center;">
+                <span style="background: rgba(0,0,0,0.6); padding: 5px 15px; border-radius: 10px; font-weight: bold;">MAFIA</span>
+            </div>
+            <div class="card-details">
+                <span class="game-title">Mafia</span>
+                <span class="provider">Mafia Games</span>
+                <br><button class="claim-btn">GET FREEPLAY</button>
+            </div>
+        </div>
+
+        <!-- Game Vault -->
+        <div class="game-card-grid card-cyan" onclick="sendTelegramMessage('gamevault', 'Game Vault')">
+            <div class="thumbnail" style="background-image: url('vault.jpg'); background-size: cover; background-position: center;">
+                <span style="background: rgba(0,0,0,0.6); padding: 5px 15px; border-radius: 10px; font-weight: bold;">VAULT</span>
+            </div>
+            <div class="card-details">
+                <span class="game-title">Game Vault</span>
+                <span class="provider">Vault Games</span>
+                <br><button class="claim-btn">GET FREEPLAY</button>
+            </div>
+        </div>
+
+        <!-- Vegas Sweeps -->
+        <div class="game-card-grid card-yellow" onclick="sendTelegramMessage('vegassweeps', 'Vegas Sweeps')">
+            <div class="thumbnail" style="background-image: url('vegas.jpg'); background-size: cover; background-position: center;">
+                <span style="background: rgba(0,0,0,0.6); padding: 5px 15px; border-radius: 10px; font-weight: bold;">VEGAS</span>
+            </div>
+            <div class="card-details">
+                <span class="game-title">Vegas Sweeps</span>
+                <span class="provider">Vegas Games</span>
+                <br><button class="claim-btn">GET FREEPLAY</button>
+            </div>
+        </div>
+
+        <!-- Blue Dragon -->
+        <div class="game-card-grid card-electric" onclick="sendTelegramMessage('bluedragon', 'Blue Dragon')">
+            <div class="thumbnail" style="background-image: url('dragon.jpg'); background-size: cover; background-position: center;">
+                <span style="background: rgba(0,0,0,0.6); padding: 5px 15px; border-radius: 10px; font-weight: bold;">DRAGON</span>
+            </div>
+            <div class="card-details">
+                <span class="game-title">Blue Dragon</span>
+                <span class="provider">Dragon Games</span>
+                <br><button class="claim-btn">GET FREEPLAY</button>
+            </div>
+        </div>
+
+        <!-- Mr All in One -->
+        <div class="game-card-grid card-orange" onclick="sendTelegramMessage('mrallinone', 'Mr All in One')">
+            <div class="thumbnail" style="background-image: url('allin.jpg'); background-size: cover; background-position: center;">
+                <span style="background: rgba(0,0,0,0.6); padding: 5px 15px; border-radius: 10px; font-weight: bold;">ALL IN</span>
+            </div>
+            <div class="card-details">
+                <span class="game-title">Mr All in One</span>
+                <span class="provider">All-in Games</span>
+                <br><button class="claim-btn">GET FREEPLAY</button>
+            </div>
+        </div>
+
+        <!-- Highstakes -->
+        <div class="game-card-grid card-dark" onclick="sendTelegramMessage('highstakes', 'Highstakes')">
+            <div class="thumbnail" style="background-image: url('high.jpg'); background-size: cover; background-position: center;">
+                <span style="background: rgba(0,0,0,0.6); padding: 5px 15px; border-radius: 10px; font-weight: bold;">HIGH</span>
+            </div>
+            <div class="card-details">
+                <span class="game-title">Highstakes</span>
+                <span class="provider">High Roller</span>
+                <br><button class="claim-btn">GET FREEPLAY</button>
+            </div>
+        </div>
+
+        <!-- River Monster -->
+        <div class="game-card-grid card-teal" onclick="sendTelegramMessage('rivermonster', 'River Monster')">
+            <div class="thumbnail" style="background-image: url('monster.jpg'); background-size: cover; background-position: center;">
+                <span style="background: rgba(0,0,0,0.6); padding: 5px 15px; border-radius: 10px; font-weight: bold;">MONSTER</span>
+            </div>
+            <div class="card-details">
+                <span class="game-title">River Monster</span>
+                <span class="provider">River Games</span>
+                <br><button class="claim-btn">GET FREEPLAY</button>
+            </div>
+        </div>
     </div>
 
     <!-- Categories -->
@@ -338,7 +554,7 @@
     <!-- Telegram Strip -->
     <div class="telegram-strip">
         <span style="font-size: 2rem;">✈️</span>
-        <a href="https://t.me/yourtelegramgroup" target="_blank">JOIN TELEGRAM FOR FREE ACCOUNTS & DAILY BONUS!</a>
+        <a href="https://t.me/onlinegamingslots" target="_blank">JOIN TELEGRAM FOR FREE ACCOUNTS & DAILY BONUS!</a>
         <span style="font-size: 2rem;">✈️</span>
     </div>
 
@@ -404,7 +620,7 @@
         // === FLOATING PARTICLES ===
         function initParticles() {
             const container = document.getElementById('particleContainer');
-            const emojis = ['💎', '🎰', '💰', '', '🔥', '✨', '🃏', '🍀'];
+            const emojis = ['💎', '🎰', '💰', '🎲', '', '✨', '', '🍀'];
             for (let i = 0; i < 25; i++) {
                 const particle = document.createElement('div');
                 particle.className = 'particle';
@@ -433,6 +649,7 @@
 
         // === CAROUSEL ===
         const track = document.getElementById('carouselTrack');
+        // Let it count the 10 duplicated cards in DOM
         const cards = track.querySelectorAll('.game-card-banner');
         const totalCards = cards.length;
         let currentIndex = 0;
@@ -442,7 +659,9 @@
         function updateCardsPerView() {
             if (window.innerWidth <= 480) cardsPerView = 2;
             else if (window.innerWidth <= 768) cardsPerView = 3;
-            else cardsPerView = 5;
+            else cardsPerView = 4; // Use 4 to allow 2 to be hidden and enable scrolling
+            
+            // Re-calculate the track transform because max index changed
             maxIndex = Math.max(0, totalCards - cardsPerView);
             if (currentIndex > maxIndex) currentIndex = maxIndex;
             updateCarousel();
@@ -513,41 +732,103 @@
         window.addEventListener('resize', updateCardsPerView);
         updateCardsPerView();
 
-        // === SLOT MACHINE ===
-        const symbols = ['🍒', '🍋', '', '', '7️⃣', '🎰'];
+        // === SLOT MACHINE WITH 3 OUTCOMES ===
+        // Outcomes: 100% Bonus, $5 Freeplay, Better Luck Next Time
+        const outcomes = [
+            { type: 'bonus', emoji: '🎁', title: '100% BONUS!', subtitle: '100% SIGNUP BONUS CLAIMED!', slogan: 'THAT\'S HOW WE ALL DO IT! 🔥' },
+            { type: 'freeplay', emoji: '💵', title: '$5 FREEPLAY!', subtitle: '$5 FREEPLAY ACTIVATED!', slogan: 'START PLAYING NOW! 🎰' },
+            { type: 'lose', emoji: '', title: 'BETTER LUCK', subtitle: 'BETTER LUCK NEXT TIME!', slogan: 'TRY AGAIN SOON! 💪' }
+        ];
+
         function spinSlots() {
             const spinBtn = document.getElementById('spinBtn');
             const reel1 = document.getElementById('reel1');
             const reel2 = document.getElementById('reel2');
             const reel3 = document.getElementById('reel3');
-            spinBtn.disabled = true; spinBtn.classList.add('spinning'); spinBtn.textContent = 'SPINNING...';
-            reel1.classList.add('spinning'); reel2.classList.add('spinning'); reel3.classList.add('spinning');
-            reel1.classList.remove('win'); reel2.classList.remove('win'); reel3.classList.remove('win');
-            const result1 = symbols[Math.floor(Math.random() * symbols.length)];
-            const result2 = symbols[Math.floor(Math.random() * symbols.length)];
-            const result3 = symbols[Math.floor(Math.random() * symbols.length)];
-            setTimeout(() => { reel1.classList.remove('spinning'); reel1.textContent = result1; }, 1000);
-            setTimeout(() => { reel2.classList.remove('spinning'); reel2.textContent = result2; }, 1500);
+            
+            spinBtn.disabled = true; 
+            spinBtn.classList.add('spinning'); 
+            spinBtn.textContent = 'SPINNING...';
+            
+            reel1.classList.add('spinning'); 
+            reel2.classList.add('spinning'); 
+            reel3.classList.add('spinning');
+            reel1.classList.remove('win'); 
+            reel2.classList.remove('win'); 
+            reel3.classList.remove('win');
+            
+            // Randomly select one of the 3 outcomes
+            const result = outcomes[Math.floor(Math.random() * outcomes.length)];
+            
+            // Set all reels to show the result emoji
+            setTimeout(() => { 
+                reel1.classList.remove('spinning'); 
+                reel1.textContent = result.emoji || '❌'; 
+            }, 1000);
+            
+            setTimeout(() => { 
+                reel2.classList.remove('spinning'); 
+                reel2.textContent = result.emoji || '❌'; 
+            }, 1500);
+            
             setTimeout(() => {
-                reel3.classList.remove('spinning'); reel3.textContent = result3;
-                if (result1 === result2 && result2 === result3) {
+                reel3.classList.remove('spinning'); 
+                reel3.textContent = result.emoji || '❌';
+                
+                if (result.type !== 'lose') {
+                    // Win - show celebration
                     setTimeout(() => {
-                        reel1.classList.add('win'); reel2.classList.add('win'); reel3.classList.add('win');
-                        showWinModal(); createMassiveConfetti();
+                        reel1.classList.add('win'); 
+                        reel2.classList.add('win'); 
+                        reel3.classList.add('win');
+                        showWinModal(result);
+                        createMassiveConfetti();
                     }, 300);
-                } else { spinBtn.disabled = false; spinBtn.classList.remove('spinning'); spinBtn.textContent = '🎲 SPIN AGAIN 🎲'; }
+                } else {
+                    // Lose - just show message
+                    setTimeout(() => {
+                        showWinModal(result);
+                    }, 300);
+                }
+                
+                spinBtn.disabled = false; 
+                spinBtn.classList.remove('spinning'); 
+                spinBtn.textContent = '🎲 SPIN AGAIN 🎲';
             }, 2000);
         }
 
-        function showWinModal() { document.getElementById('winModal').style.display = 'flex'; }
-        function claimBonus() {
-            document.getElementById('winModal').style.display = 'none';
-            const spinBtn = document.getElementById('spinBtn');
-            spinBtn.disabled = false; spinBtn.classList.remove('spinning'); spinBtn.textContent = '🎲 SPIN NOW 🎲';
-            window.open('https://t.me/yourtelegramgroup', '_blank');
+        function showWinModal(result) {
+            document.getElementById('winTitle').textContent = result.title;
+            document.getElementById('winSubtitle').textContent = result.subtitle;
+            document.getElementById('winSlogan').textContent = result.slogan;
+            
+            const winEmoji = document.querySelector('.win-emoji');
+            if (result.type === 'bonus') {
+                winEmoji.textContent = '💃';
+            } else if (result.type === 'freeplay') {
+                winEmoji.textContent = '💰';
+            } else {
+                winEmoji.textContent = '';
+            }
+            
+            document.getElementById('winModal').style.display = 'flex';
         }
 
-        function playGames() { window.open('https://t.me/yourtelegramgroup', '_blank'); }
+        function claimBonus() {
+            document.getElementById('winModal').style.display = 'none';
+            window.open('https://t.me/onlinegamingslots', '_blank');
+        }
+
+        function playGames() { window.open('https://t.me/onlinegamingslots', '_blank'); }
+
+        // === SEND TELEGRAM MESSAGE - UPDATED WITH YOUR CHANNEL ===
+        function sendTelegramMessage(username, gameName) {
+            const telegramGroup = 'onlinegamingslots';  // ✅ YOUR TELEGRAM CHANNEL
+            const message = `Hi! I want $5 freeplay account on ${gameName}. Please help me get started!`;
+            const telegramLink = `https://t.me/${telegramGroup}?text=${encodeURIComponent(message)}`;
+            window.open(telegramLink, '_blank');
+            createConfetti();
+        }
 
         // === CONFETTI ===
         function createConfetti() {
@@ -583,14 +864,6 @@
                     setTimeout(() => confetti.remove(), 5000);
                 }, i * 30);
             }
-        }
-
-        function sendTelegramMessage(username, gameName) {
-            const telegramGroup = 'yourtelegramgroup';
-            const message = `Hey! I want freeplay on ${gameName}`;
-            const telegramLink = `https://t.me/${telegramGroup}?text=${encodeURIComponent(message)}`;
-            window.open(telegramLink, '_blank');
-            createConfetti();
         }
 
         // Initialize

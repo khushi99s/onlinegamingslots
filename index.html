@@ -158,9 +158,9 @@
         .game-card-grid::before { content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%; background: linear-gradient(to right, transparent, rgba(255,255,255,0.3), transparent); transform: skewX(-25deg); transition: all 0.8s ease; z-index: 10; pointer-events: none; }
         .game-card-grid:hover { transform: translateY(-15px) scale(1.05) !important; box-shadow: 0 20px 50px rgba(0,229,255,0.6), 0 0 30px rgba(255,215,0,0.4); border-color: #00E5FF; }
         .game-card-grid:hover::before { left: 200%; }
-        .thumbnail { height: 180px; width: 100%; display: flex; align-items: center; justify-content: center; position: relative; background-size: cover; background-position: center; transition: transform 0.4s ease; border-bottom: 2px solid rgba(0,0,0,0.8); }
+        .thumbnail { height: 160px; width: 100%; display: flex; align-items: center; justify-content: center; position: relative; background-size: 100% 100%; background-repeat: no-repeat; transition: transform 0.4s ease; border-bottom: 2px solid rgba(0,0,0,0.8); }
         .game-card-grid:hover .thumbnail { transform: scale(1.1); }
-        .thumbnail::after { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(to bottom, transparent 50%, rgba(10,10,15,0.95) 100%); pointer-events: none; }
+        .thumbnail::after { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(to bottom, transparent 60%, rgba(10,10,15,0.95) 100%); pointer-events: none; }
         .card-details { padding: 25px 20px; text-align: center; background: #111116; position: relative; z-index: 2; }
         .game-title { font-family: 'Montserrat', sans-serif; font-weight: 900; margin-bottom: 5px; display: block; font-size: 1.4rem; text-transform: uppercase; color: #fff; text-shadow: 0 0 10px rgba(255, 255, 255, 0.5); letter-spacing: 1px; }
         .provider { font-size: 0.8rem; display: inline-block; font-weight: 700; padding: 5px 15px; border-radius: 30px; background: rgba(255,255,255,0.1); margin-bottom: 15px; color: #FFF; text-transform: uppercase; letter-spacing: 1.5px; }
@@ -193,8 +193,8 @@
         .telegram-strip a:hover { transform: scale(1.1); text-shadow: 0 0 25px rgba(255,255,255,0.9); }
 
         /* Confetti */
-        .confetti { position: fixed; width: 12px; height: 12px; top: -20px; animation: confettiFall 5s linear infinite; z-index: 9999; }
-        @keyframes confettiFall { 0% { transform: translateY(0) rotate(0deg); opacity: 1; } 100% { transform: translateY(100vh) rotate(720deg); opacity: 0; } }
+        .confetti { position: fixed; top: -30px; animation: confettiFall 4s cubic-bezier(0.36, 0, 0.66, -0.56) infinite; z-index: 10005; pointer-events: none; display: flex; align-items: center; justify-content: center; }
+        @keyframes confettiFall { 0% { transform: translateY(0) rotate(0deg) scale(1); opacity: 1; } 100% { transform: translateY(120vh) rotate(1080deg) scale(0.5); opacity: 0; } }
 
         /* Categories */
         .categories { display: flex; gap: 20px; padding: 50px 20px; width: 90%; max-width: 1200px; margin: 0 auto; overflow-x: auto; justify-content: center; flex-wrap: wrap; position: relative; z-index: 10; }
@@ -527,13 +527,13 @@
             </div>
         </div>
 
-        <!-- River Monster -->
-        <div class="game-card-grid card-teal" style="--animation-order: 12" onclick="sendTelegramMessage('rivermonster', 'River Monster')">
-            <div class="thumbnail" style="background-image: url('monster.jpg');">
+        <!-- Milkyway (Replaced River Monster) -->
+        <div class="game-card-grid card-teal" style="--animation-order: 12" onclick="sendTelegramMessage('milkyway', 'Milkyway')">
+            <div class="thumbnail" style="background-image: url('milkyway.jpg');">
             </div>
             <div class="card-details">
-                <span class="game-title">River Monster</span>
-                <span class="provider">River Games</span>
+                <span class="game-title">Milkyway</span>
+                <span class="provider">Milky Games</span>
                 <br><button class="claim-btn">GET FREEPLAY</button>
             </div>
         </div>
@@ -832,34 +832,54 @@
             const container = document.getElementById('confetti-container');
             const colors = ['#FFD600', '#F50057', '#00E676', '#2979FF', '#00E5FF', '#FF6D00', '#8A2BE2'];
             setInterval(() => {
-                const confetti = document.createElement('div');
-                confetti.className = 'confetti';
-                confetti.style.left = Math.random() * 100 + 'vw';
-                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-                confetti.style.animationDuration = (Math.random() * 3 + 3) + 's';
-                confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
-                confetti.style.opacity = Math.random() * 0.5 + 0.5;
-                container.appendChild(confetti);
-                setTimeout(() => confetti.remove(), 6000);
-            }, 400);
-        }
-
-        function createMassiveConfetti() {
-            const container = document.getElementById('confetti-container');
-            const colors = ['#FFD600', '#F50057', '#00E676', '#2979FF', '#00E5FF', '#FF6D00', '#8A2BE2'];
-            for (let i = 0; i < 100; i++) {
-                setTimeout(() => {
+                for (let j = 0; j < 3; j++) { // Spawn 3 times as much idle confetti!
                     const confetti = document.createElement('div');
                     confetti.className = 'confetti';
                     confetti.style.left = Math.random() * 100 + 'vw';
                     confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-                    confetti.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                    confetti.style.animationDuration = (Math.random() * 3 + 2) + 's';
                     confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
-                    confetti.style.width = (Math.random() * 10 + 10) + 'px';
-                    confetti.style.height = (Math.random() * 10 + 10) + 'px';
+                    confetti.style.opacity = Math.random() * 0.7 + 0.3;
+                    confetti.style.boxShadow = `0 0 10px ${confetti.style.backgroundColor}`;
                     container.appendChild(confetti);
                     setTimeout(() => confetti.remove(), 5000);
-                }, i * 30);
+                }
+            }, 300); // Faster spawns
+        }
+
+        function createMassiveConfetti() {
+            const container = document.getElementById('confetti-container');
+            const colors = ['#FFD600', '#F50057', '#00E676', '#2979FF', '#00E5FF', '#FF6D00', '#8A2BE2', '#FFFFFF'];
+            const shapes = ['💵', '💰', '💎', '🎰', '✨', '🪙'];
+            
+            // Spawn 300 classic confettis in a massive burst
+            for (let i = 0; i < 300; i++) {
+                setTimeout(() => {
+                    const confetti = document.createElement('div');
+                    
+                    // 20% chance to be an emoji instead of a colored square
+                    if (Math.random() < 0.2) {
+                        confetti.textContent = shapes[Math.floor(Math.random() * shapes.length)];
+                        confetti.style.fontSize = (Math.random() * 20 + 20) + 'px';
+                        confetti.style.pointerEvents = 'none';
+                        confetti.style.textShadow = '0 0 20px #FFD700';
+                    } else {
+                        confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                        confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
+                        confetti.style.width = (Math.random() * 15 + 10) + 'px';
+                        confetti.style.height = (Math.random() * 15 + 10) + 'px';
+                        confetti.style.boxShadow = `0 0 15px ${confetti.style.backgroundColor}`;
+                    }
+
+                    confetti.className = 'confetti';
+                    // Spread from a central explosion or rain across the top
+                    confetti.style.left = Math.random() * 100 + 'vw';
+                    confetti.style.animationDuration = (Math.random() * 2 + 1.5) + 's';
+                    confetti.style.opacity = Math.random() * 0.5 + 0.5;
+                    confetti.style.zIndex = '10001'; // Above modal
+                    container.appendChild(confetti);
+                    setTimeout(() => confetti.remove(), 4000);
+                }, i * 10); // Super fast firing
             }
         }
 

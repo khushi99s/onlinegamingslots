@@ -203,6 +203,45 @@ nav a:hover{color:var(--cyan);}
 .cta-sub{font-size:1.1rem;color:var(--muted);max-width:520px;margin:0 auto 2.5rem;line-height:1.7;font-weight:600;}
 .cta-main{padding:1.2rem 3.5rem;background:linear-gradient(90deg,var(--fire),var(--amber));color:#fff;border:none;border-radius:4px;font-family:'Bebas Neue',sans-serif;font-size:1.6rem;letter-spacing:3px;cursor:pointer;text-decoration:none;box-shadow:0 0 30px rgba(255,69,0,0.5);transition:all .3s;display:inline-block;}
 .cta-main:hover{transform:translateY(-4px);box-shadow:0 16px 50px rgba(255,69,0,0.7);}
+
+@media(max-width:900px){
+  header{padding:.7rem 1rem;flex-wrap:wrap;justify-content:center;gap:.6rem;}
+  .logo{font-size:1.5rem;letter-spacing:2px;}
+  nav{gap:.9rem;flex-wrap:wrap;justify-content:center;}
+  nav a{font-size:.85rem;letter-spacing:1px;}
+  .hero{min-height:auto;padding:130px 1rem 3rem;}
+  .hero-title{font-size:clamp(3rem,15vw,6rem);}
+  .hero-sub{font-size:1rem;}
+  .hero-btns{gap:.8rem;margin-top:1.6rem;}
+  .btn-primary,.btn-ghost{padding:.85rem 1.2rem;font-size:.9rem;letter-spacing:2px;}
+  .spin-section,.games-section,.cta-section,.jackpot-section{padding-left:1rem;padding-right:1rem;}
+  .section-head{gap:.75rem;}
+  .section-head h2{font-size:clamp(1.5rem,8vw,2.4rem);letter-spacing:2px;}
+  .section-badge{display:none;}
+  .wheel-container{width:min(320px,88vw);height:min(320px,88vw);}
+  #spinCanvas{width:100%;height:100%;}
+}
+
+@media(max-width:640px){
+  .spin-info{text-align:center;}
+  .spin-info h3{font-size:2.2rem;}
+  .spin-info p{font-size:.95rem;}
+  .game-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:.8rem;}
+  .game-info{padding:1rem .8rem;}
+  .game-name{font-size:1.15rem;margin-bottom:.55rem;}
+  .game-rtp{font-size:.62rem;letter-spacing:2px;}
+  .play-btn{opacity:1;transform:none;padding:.5rem;font-size:.75rem;letter-spacing:2px;}
+}
+
+@media(max-width:420px){
+  .game-grid{grid-template-columns:1fr;}
+}
+
+@media(pointer:coarse){
+  body{cursor:auto;}
+  #cursor{display:none;}
+}
+
 footer{position:relative;z-index:2;text-align:center;padding:2rem;border-top:1px solid var(--border);font-family:'Barlow Condensed',sans-serif;font-size:.85rem;letter-spacing:2px;text-transform:uppercase;color:var(--muted);}
 ::-webkit-scrollbar{width:4px;}::-webkit-scrollbar-track{background:var(--bg);}::-webkit-scrollbar-thumb{background:var(--cyan);border-radius:2px;}
 </style>
@@ -297,14 +336,11 @@ footer{position:relative;z-index:2;text-align:center;padding:2rem;border-top:1px
       <h3>Spin &amp; Win Big!</h3>
       <p>One free spin per visit. Land on a prize and claim it instantly via our Telegram VIP channel — 24/7 support ready!</p>
       <div class="spin-prizes">
-        <div class="spin-prize-row"><div class="prize-dot" style="background:#FF4500;"></div><span>$500 Free Play Credit</span></div>
-        <div class="spin-prize-row"><div class="prize-dot" style="background:#FFD700;"></div><span>100 Free Spins</span></div>
-        <div class="spin-prize-row"><div class="prize-dot" style="background:#00E5FF;"></div><span>50% Deposit Match</span></div>
-        <div class="spin-prize-row"><div class="prize-dot" style="background:#9B30FF;"></div><span>$100 Bonus Cash</span></div>
-        <div class="spin-prize-row"><div class="prize-dot" style="background:#FF0088;"></div><span>VIP Mystery Box</span></div>
-        <div class="spin-prize-row"><div class="prize-dot" style="background:#7ccc00;"></div><span>25 Free Spins</span></div>
-        <div class="spin-prize-row"><div class="prize-dot" style="background:#00b4db;"></div><span>$50 Free Play</span></div>
-        <div class="spin-prize-row"><div class="prize-dot" style="background:#FF8C00;"></div><span>200% Welcome Bonus</span></div>
+        <div class="spin-prize-row"><div class="prize-dot" style="background:#FFD700;"></div><span>100% Bonus (Highest Chance)</span></div>
+        <div class="spin-prize-row"><div class="prize-dot" style="background:#00E5FF;"></div><span>Freeplay (Second Chance)</span></div>
+        <div class="spin-prize-row"><div class="prize-dot" style="background:#FF8C00;"></div><span>30% Regular Bonus</span></div>
+        <div class="spin-prize-row"><div class="prize-dot" style="background:#ff4d4d;"></div><span>200% Bonus + $500 (Rare)</span></div>
+        <div class="spin-prize-row"><div class="prize-dot" style="background:#6c757d;"></div><span>Better Luck Next Time</span></div>
       </div>
       <button class="spin-btn" id="spinBtn">🎡 SPIN NOW</button>
     </div>
@@ -347,7 +383,7 @@ footer{position:relative;z-index:2;text-align:center;padding:2rem;border-top:1px
       <div class="game-info"><div class="game-rtp">RTP 96.9%</div><div class="game-name">Blue Dragon</div><button class="play-btn">Play Now</button></div>
     </a>
     <a href="https://t.me/onlinegamingslots" target="_blank" class="game-card">
-      <div class="game-img g7" style="background-image:url('vegas.sweeps.jpg');"><div class="game-icon">🎰</div></div>
+      <div class="game-img g7 vegas-img"><div class="game-icon">🎰</div></div>
       <div class="game-info"><div class="game-rtp">RTP 95.5%</div><div class="game-name">Vegas Sweeps</div><button class="play-btn">Play Now</button></div>
     </a>
     <a href="https://t.me/onlinegamingslots" target="_blank" class="game-card">
@@ -379,6 +415,27 @@ document.addEventListener('mousemove', e => { cursor.style.left=e.clientX+'px'; 
 document.querySelectorAll('button,a,.game-card').forEach(el => {
   el.addEventListener('mouseenter', () => cursor.classList.add('big'));
   el.addEventListener('mouseleave', () => cursor.classList.remove('big'));
+});
+
+/* ── Game Click -> Telegram Lead ── */
+const TELEGRAM_USERNAME = 'onlinegamingslots';
+
+function openGameLeadToTelegram(gameName) {
+  const message = [
+    'Hi OGS, I want to play now.',
+    `Game: ${gameName}`
+  ].join('\n');
+
+  const shareUrl = `https://t.me/share/url?url=${encodeURIComponent(`https://t.me/${TELEGRAM_USERNAME}`)}&text=${encodeURIComponent(message)}`;
+  window.open(shareUrl, '_blank');
+}
+
+document.querySelectorAll('.game-card').forEach(card => {
+  card.addEventListener('click', e => {
+    e.preventDefault();
+    const gameName = card.querySelector('.game-name')?.textContent?.trim() || 'Unknown Game';
+    openGameLeadToTelegram(gameName);
+  });
 });
  
 /* ── Particles ── */
@@ -425,20 +482,40 @@ const obs=new IntersectionObserver(entries=>{ entries.forEach(e=>{ if(e.isInters
 document.querySelectorAll('.game-card,.jackpot-section,.cta-section,.spin-section').forEach(el=>{
   el.style.opacity='0'; el.style.transform='translateY(30px)'; el.style.transition='opacity .6s ease, transform .6s ease'; obs.observe(el);
 });
+
+/* ── Vegas Image Resolver ── */
+const vegasCardImage = document.querySelector('.vegas-img');
+if (vegasCardImage) {
+  const vegasCandidates = ['vegas.jpg', 'vegas.sweeps.jpg', 'vegas.jpeg', 'vegas.png'];
+  const tryVegasImage = (index = 0) => {
+    if (index >= vegasCandidates.length) return;
+    const img = new Image();
+    img.onload = () => {
+      vegasCardImage.style.backgroundImage = `url('${vegasCandidates[index]}')`;
+    };
+    img.onerror = () => {
+      tryVegasImage(index + 1);
+    };
+    img.src = vegasCandidates[index];
+  };
+  tryVegasImage();
+}
  
 /* ── LUCKY SPIN WHEEL ── */
 const spinCanvas = document.getElementById('spinCanvas');
 const sc = spinCanvas.getContext('2d');
  
 const segments = [
-  { label:'$500 Free Play',    color:'#FF4500', emoji:'💰' },
-  { label:'100 Free Spins',    color:'#FFD700', emoji:'🎰' },
-  { label:'50% Dep. Match',    color:'#00E5FF', emoji:'💎' },
-  { label:'$100 Bonus Cash',   color:'#9B30FF', emoji:'💵' },
-  { label:'VIP Mystery Box',   color:'#FF0088', emoji:'🎁' },
-  { label:'25 Free Spins',     color:'#7ccc00', emoji:'🎡' },
-  { label:'$50 Free Play',     color:'#00b4db', emoji:'⚡' },
-  { label:'200% Welcome',      color:'#FF8C00', emoji:'🏆' },
+  { label:'100% Bonus',            color:'#FFD700', emoji:'🏆' },
+  { label:'100% Bonus',            color:'#f2c94c', emoji:'🏆' },
+  { label:'100% Bonus',            color:'#f8d66d', emoji:'🏆' },
+  { label:'100% Bonus',            color:'#e6b800', emoji:'🏆' },
+  { label:'Freeplay',              color:'#00E5FF', emoji:'🎁' },
+  { label:'Freeplay',              color:'#00b4db', emoji:'🎁' },
+  { label:'30% Regular Bonus',     color:'#FF8C00', emoji:'💸' },
+  { label:'200% Bonus + $500',     color:'#ff4d4d', emoji:'💥' },
+  { label:'Better Luck Next Time', color:'#6c757d', emoji:'🍀' },
+  { label:'Better Luck Next Time', color:'#7f8c8d', emoji:'🍀' },
 ];
  
 const NUM = segments.length;
@@ -482,7 +559,14 @@ document.getElementById('spinBtn').addEventListener('click', function() {
   if(spinning) return;
   spinning=true; this.disabled=true; this.textContent='🌀 SPINNING...';
  
-  const winIndex = Math.floor(Math.random() * NUM);
+  // Force non-winning outcome on every spin.
+  const nonWinningIndexes = segments
+    .map((seg, index) => ({ seg, index }))
+    .filter(item => item.seg.label === 'Better Luck Next Time')
+    .map(item => item.index);
+  const winIndex = nonWinningIndexes.length
+    ? nonWinningIndexes[Math.floor(Math.random() * nonWinningIndexes.length)]
+    : NUM - 1;
   const totalRotation = (Math.PI*2) * (10 + Math.floor(Math.random()*5));
   // Pointer at top = -PI/2. We want slice winIndex centered under it.
   const sliceMid = winIndex * ARC + ARC/2;
@@ -505,10 +589,15 @@ document.getElementById('spinBtn').addEventListener('click', function() {
     else {
       spinning=false;
       const seg = segments[winIndex];
+      const modalTitleEl = document.querySelector('.modal-title');
+      if (modalTitleEl) {
+        modalTitleEl.textContent = seg.label === 'Better Luck Next Time' ? 'Try Again' : 'You Won!';
+      }
       document.getElementById('modalEmoji').textContent=seg.emoji;
       document.getElementById('modalPrize').textContent=seg.label;
       document.getElementById('spinModal').classList.add('show');
-      btn.textContent='✅ Prize Claimed!';
+      btn.textContent='🎡 SPIN NOW';
+      btn.disabled = false;
     }
   }
   requestAnimationFrame(animate);

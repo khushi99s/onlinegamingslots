@@ -43,19 +43,20 @@
         @keyframes logoShine { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
 
         /* === GOLDEN JACKPOT BANNER === */
-        .jackpot-banner-wrapper { position: relative; z-index: 10; width: 95%; max-width: 900px; margin: 30px auto; padding: 0 20px; }
-        .jackpot-banner { background: radial-gradient(ellipse at center, #1a1200 0%, #0d0800 60%, #050505 100%); border-radius: 20px; padding: 40px 30px 30px; position: relative; overflow: hidden; border: 2px solid rgba(255, 215, 0, 0.3); box-shadow: 0 0 60px rgba(255, 215, 0, 0.15), inset 0 0 60px rgba(0, 0, 0, 0.5); }
-        .jackpot-banner::before { content: ''; position: absolute; top: -2px; left: -2px; right: -2px; bottom: -2px; border-radius: 22px; background: linear-gradient(45deg, transparent 20%, rgba(255, 215, 0, 0.6) 40%, rgba(255, 215, 0, 0.9) 50%, rgba(255, 215, 0, 0.6) 60%, transparent 80%); z-index: -1; animation: borderRotate 4s linear infinite; background-size: 200% 200%; }
+        .jackpot-banner-wrapper { position: relative; z-index: 10; width: 95%; max-width: 900px; margin: 30px auto; padding: 0 20px; animation: bounceBanner 4s infinite ease-in-out; }
+        @keyframes bounceBanner { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+        .jackpot-banner { background: #0a0a0a; border-radius: 20px; padding: 40px 30px 30px; position: relative; overflow: hidden; border: 2px solid #FFD700; box-shadow: 0 0 60px rgba(255, 215, 0, 0.4), inset 0 0 60px rgba(255, 215, 0, 0.1); }
+        .jackpot-banner::before { content: ''; position: absolute; top: -2px; left: -2px; right: -2px; bottom: -2px; border-radius: 22px; background: linear-gradient(45deg, transparent 20%, #FFD700 40%, #FFF 50%, #FFD700 60%, transparent 80%); z-index: -1; animation: borderRotate 2s linear infinite; background-size: 200% 200%; }
         @keyframes borderRotate { 0% { background-position: 0% 0%; } 100% { background-position: 200% 200%; } }
-        .jackpot-banner::after { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; border-radius: 20px; background: radial-gradient(ellipse at center top, rgba(255, 215, 0, 0.08) 0%, transparent 70%); pointer-events: none; }
+        .jackpot-banner::after { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; border-radius: 20px; background: radial-gradient(ellipse at center top, rgba(255, 215, 0, 0.1) 0%, transparent 70%); pointer-events: none; }
         .jackpot-section { text-align: center; margin-bottom: 30px; position: relative; z-index: 2; }
-        .jackpot-label { font-family: 'Montserrat', sans-serif; font-size: 1.1rem; font-weight: 700; text-transform: uppercase; letter-spacing: 4px; color: #FFD700; margin-bottom: 10px; text-shadow: 0 0 20px rgba(255, 215, 0, 0.5); animation: labelPulse 3s ease-in-out infinite; }
-        @keyframes labelPulse { 0%, 100% { opacity: 0.8; } 50% { opacity: 1; text-shadow: 0 0 30px rgba(255, 215, 0, 0.8); } }
-        .jackpot-amount { font-family: 'Montserrat', sans-serif; font-size: 3rem; font-weight: 900; background: linear-gradient(180deg, #FFD700 0%, #FFA500 50%, #FF8C00 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.6)); line-height: 1.2; transition: transform 0.3s; }
-        .jackpot-amount.updating { animation: countBump 0.3s ease; }
-        @keyframes countBump { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
-        .jackpot-live-dot { display: inline-block; width: 8px; height: 8px; background: #00FF00; border-radius: 50%; margin-left: 10px; vertical-align: middle; animation: livePulse 1.5s ease-in-out infinite; box-shadow: 0 0 10px rgba(0, 255, 0, 0.8); }
-        @keyframes livePulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.4; transform: scale(0.8); } }
+        .jackpot-label { font-family: 'Montserrat', sans-serif; font-size: 1.3rem; font-weight: 900; text-transform: uppercase; letter-spacing: 4px; color: #FFD700; margin-bottom: 10px; text-shadow: 0 0 20px rgba(255, 215, 0, 0.8); animation: labelPulse 1.5s ease-in-out infinite; }
+        @keyframes labelPulse { 0%, 100% { opacity: 0.8; transform: scale(1); } 50% { opacity: 1; transform: scale(1.05); text-shadow: 0 0 30px rgba(255, 215, 0, 1); } }
+        .jackpot-amount { font-family: 'Montserrat', sans-serif; font-size: 3.5rem; font-weight: 900; background: linear-gradient(180deg, #FFD700 0%, #FFA500 50%, #FF8C00 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 0 25px rgba(255, 215, 0, 0.8)); line-height: 1.2; transition: transform 0.1s; animation: throbAmount 2s infinite; }
+        @keyframes throbAmount { 0%, 100% { transform: scale(1); filter: drop-shadow(0 0 25px rgba(255, 215, 0, 0.5)); } 50% { transform: scale(1.02); filter: drop-shadow(0 0 40px rgba(255, 215, 0, 1)); } }
+        .jackpot-amount.updating { transform: scale(1.15) rotate(2deg); filter: drop-shadow(0 0 50px rgba(255, 255, 255, 1)); }
+        .jackpot-live-dot { display: inline-block; width: 12px; height: 12px; background: #00FF00; border-radius: 50%; margin-left: 10px; vertical-align: middle; animation: livePulse 0.8s ease-in-out infinite; box-shadow: 0 0 15px rgba(0, 255, 0, 1); }
+        @keyframes livePulse { 0%, 100% { opacity: 1; transform: scale(1); box-shadow: 0 0 30px rgba(0, 255, 0, 1); } 50% { opacity: 0.2; transform: scale(0.5); box-shadow: 0 0 5px rgba(0, 255, 0, 0.5); } }
 
         /* Game Carousel */
         .carousel-wrapper { position: relative; z-index: 2; margin-bottom: 25px; }
@@ -77,11 +78,13 @@
         .carousel-arrows { display: flex; justify-content: space-between; position: absolute; top: 50%; left: -10px; right: -10px; transform: translateY(-50%); pointer-events: none; z-index: 5; }
         .carousel-arrow { width: 40px; height: 40px; border-radius: 50%; background: rgba(0, 0, 0, 0.7); border: 2px solid rgba(255, 215, 0, 0.5); color: #FFD700; font-size: 1.2rem; cursor: pointer; display: flex; align-items: center; justify-content: center; pointer-events: all; transition: all 0.3s; backdrop-filter: blur(5px); }
         .carousel-arrow:hover { background: rgba(255, 215, 0, 0.2); border-color: #FFD700; transform: scale(1.1); }
-        .play-btn-wrapper { text-align: center; position: relative; z-index: 2; }
-        .play-games-btn { background: linear-gradient(180deg, #FFD700 0%, #FFA500 50%, #FF8C00 100%); color: #000; border: none; padding: 15px 50px; font-size: 1.2rem; font-weight: 800; font-family: 'Montserrat', sans-serif; text-transform: uppercase; letter-spacing: 3px; border-radius: 50px; cursor: pointer; position: relative; overflow: hidden; box-shadow: 0 8px 25px rgba(255, 215, 0, 0.4), 0 0 0 2px rgba(255, 255, 255, 0.2), inset 0 2px 0 rgba(255, 255, 255, 0.4); transition: all 0.3s; }
-        .play-games-btn:hover { transform: translateY(-3px) scale(1.05); box-shadow: 0 12px 35px rgba(255, 215, 0, 0.6), 0 0 0 2px rgba(255, 215, 0, 0.8), inset 0 2px 0 rgba(255, 255, 255, 0.4); }
-        .play-games-btn::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent); animation: btnShine 3s infinite; }
-        @keyframes btnShine { 0% { left: -100%; } 50%, 100% { left: 100%; } }
+        .play-btn-wrapper { text-align: center; position: relative; z-index: 2; margin-top: 10px; }
+        .play-games-btn { background: linear-gradient(180deg, #FFD700 0%, #FF8C00 100%); color: #000; border: none; padding: 20px 60px; font-size: 1.5rem; font-weight: 900; font-family: 'Montserrat', sans-serif; text-transform: uppercase; letter-spacing: 4px; border-radius: 50px; cursor: pointer; position: relative; overflow: hidden; box-shadow: 0 10px 40px rgba(255, 140, 0, 0.8), inset 0 -4px 0 rgba(200, 100, 0, 0.9), 0 0 0 4px rgba(255, 215, 0, 0.3); transition: transform 0.2s, box-shadow 0.2s; animation: giantPulse 2s infinite; outline: none; }
+        @keyframes giantPulse { 0%, 100% { transform: scale(1); box-shadow: 0 10px 40px rgba(255, 140, 0, 0.8), inset 0 -4px 0 rgba(200, 100, 0, 0.9), 0 0 0 4px rgba(255, 215, 0, 0.3); } 50% { transform: scale(1.08); box-shadow: 0 20px 60px rgba(255, 215, 0, 1), inset 0 -4px 0 rgba(200, 100, 0, 0.9), 0 0 0 8px rgba(255, 215, 0, 0.6); } }
+        .play-games-btn:hover { animation: none; transform: scale(1.1) translateY(-5px); box-shadow: 0 25px 60px rgba(255, 215, 0, 1), inset 0 -4px 0 rgba(200, 100, 0, 0.9), 0 0 0 6px rgba(255, 215, 0, 0.8); filter: brightness(1.2); }
+        .play-games-btn:active { animation: none; transform: scale(1) translateY(4px); box-shadow: 0 5px 20px rgba(255, 215, 0, 0.6), inset 0 0 0 rgba(200, 100, 0, 0.9); }
+        .play-games-btn::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.7), transparent); animation: btnShine 2.5s infinite linear; pointer-events: none; }
+        @keyframes btnShine { 0% { left: -100%; } 100% { left: 100%; } }
 
         /* === SLOT MACHINE === */
         .slot-machine-wrapper { width: 95%; max-width: 700px; margin: 40px auto; position: relative; z-index: 10; }
@@ -138,29 +141,35 @@
         @keyframes gradientShift { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
         .jackpot-banner-old h2 { font-family: 'Montserrat', sans-serif; margin: 0; font-size: 2.2rem; text-transform: uppercase; letter-spacing: 2px; text-shadow: 2px 2px 4px rgba(0,0,0,0.4); }
 
-        /* Bonus Banner */
-        .bonus-banner { width: 90%; max-width: 900px; margin: 20px auto; padding: 30px 40px; border-radius: 25px; background: linear-gradient(135deg, var(--green) 0%, var(--cyan) 50%, var(--electric-blue) 100%); background-size: 200% 200%; box-shadow: 0 10px 40px rgba(0, 229, 255, 0.6), 0 0 60px rgba(0, 230, 118, 0.4); text-align: center; animation: bonusGlow 3s ease-in-out infinite; border: 2px solid rgba(255,255,255,0.4); position: relative; z-index: 10; }
-        @keyframes bonusGlow { 0%, 100% { box-shadow: 0 10px 40px rgba(0, 229, 255, 0.6); transform: translateY(0); } 50% { box-shadow: 0 15px 50px rgba(0, 230, 118, 0.8); transform: translateY(-5px); } }
-        .bonus-title { font-family: 'Montserrat', sans-serif; font-size: 2rem; font-weight: 900; margin: 0 0 15px; text-transform: uppercase; color: white; text-shadow: 0 4px 12px rgba(0,0,0,0.3); }
-        .bonus-subtitle { font-size: 1.1rem; margin: 0 0 25px; opacity: 0.95; font-weight: 600; }
-        .bonus-cta { background: linear-gradient(135deg, var(--gold) 0%, var(--pink) 100%); color: #000; border: none; padding: 18px 45px; font-size: 1.3rem; font-weight: 800; border-radius: 50px; cursor: pointer; text-transform: uppercase; transition: all 0.4s; box-shadow: 0 8px 25px rgba(245, 0, 87, 0.5); font-family: 'Poppins', sans-serif; }
-        .bonus-cta:hover { transform: scale(1.08) translateY(-3px); box-shadow: 0 15px 40px rgba(255, 214, 0, 0.7); }
+        /* Bonus Banner - Max Engagement */
+        .bonus-banner { width: 90%; max-width: 900px; margin: 30px auto; padding: 40px; border-radius: 25px; background: linear-gradient(90deg, #00E676, #00E5FF, #00E676); background-size: 200% auto; box-shadow: 0 15px 50px rgba(0, 229, 255, 0.4), 0 0 0 6px rgba(255,255,255,0.1); text-align: center; animation: glowBonus 3s infinite linear, pulsateBanner 2s alternate infinite ease-in-out; position: relative; z-index: 10; border: 2px solid #FFF; }
+        @keyframes glowBonus { to { background-position: 200% center; } }
+        @keyframes pulsateBanner { 0%, 100% { transform: scale(1); box-shadow: 0 15px 50px rgba(0, 230, 118, 0.6), inset 0 0 40px rgba(255,255,255,0.5); } 50% { transform: scale(1.02); box-shadow: 0 30px 80px rgba(0, 229, 255, 0.9), inset 0 0 80px rgba(255,255,255,0.8); } }
+        .bonus-title { font-family: 'Montserrat', sans-serif; font-size: 2.8rem; font-weight: 900; margin: 0 0 10px; text-transform: uppercase; color: #FFF; text-shadow: 0 4px 15px rgba(0,0,0,0.5), 0 0 20px #000; letter-spacing: 2px; }
+        .bonus-subtitle { font-size: 1.3rem; margin: 0 0 30px; color: #000; font-weight: 800; text-transform: uppercase; text-shadow: 0 1px 3px rgba(255,255,255,0.8); letter-spacing: 1px; }
+        .bonus-cta { background: linear-gradient(180deg, #FF0055 0%, #CC0044 100%); color: #FFF; border: none; padding: 22px 60px; font-size: 1.5rem; font-weight: 900; border-radius: 50px; cursor: pointer; text-transform: uppercase; transition: all 0.2s; box-shadow: 0 6px 0 #80002A, 0 15px 30px rgba(255, 0, 85, 0.6), 0 0 0 4px rgba(255,255,255,0.5); font-family: 'Montserrat', sans-serif; letter-spacing: 3px; position: relative; overflow: hidden; animation: redHeartbeat 1s infinite; outline: none; }
+        @keyframes redHeartbeat { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); box-shadow: 0 6px 0 #80002A, 0 25px 50px rgba(255, 0, 85, 0.9), 0 0 0 8px rgba(255,255,255,0.8); } }
+        .bonus-cta:active { animation: none; transform: translateY(6px); box-shadow: 0 0 0 transparent; }
 
-        /* Game Grid 3D Luxury */
+        /* Game Grid 3D Luxury & Max Engagement */
         .game-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 30px; width: 90%; max-width: 1200px; padding: 40px 20px; margin: 0 auto; position: relative; z-index: 10; perspective: 1000px; }
-        .game-card-grid { background: linear-gradient(145deg, #181822 0%, #252536 100%); border-radius: 25px; overflow: hidden; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); display: flex; flex-direction: column; border: 1px solid rgba(255,255,255,0.05); cursor: pointer; box-shadow: 0 15px 35px rgba(0,0,0,0.5), inset 0 2px 0 rgba(255,255,255,0.05); position: relative; transform-style: preserve-3d; }
-        .game-card-grid::before { content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%; background: linear-gradient(to right, transparent, rgba(255,255,255,0.2), transparent); transform: skewX(-25deg); transition: all 0.8s ease; z-index: 10; pointer-events: none; }
-        .game-card-grid:hover { transform: translateY(-15px) rotateX(5deg) scale(1.03); box-shadow: 0 30px 60px rgba(0,0,0,0.8), 0 0 40px rgba(255,215,0,0.3), inset 0 2px 0 rgba(255,255,255,0.2); filter: brightness(1.1); border-color: rgba(255,215,0,0.4); }
+        .game-card-grid { background: linear-gradient(180deg, #181822 0%, #0d0d14 100%); border-radius: 20px; overflow: hidden; transition: all 0.3s ease; display: flex; flex-direction: column; border: 2px solid rgba(255,255,255,0.05); cursor: pointer; box-shadow: 0 10px 20px rgba(0,0,0,0.8); position: relative; transform-style: preserve-3d; animation: floatCard 6s ease-in-out infinite; animation-delay: calc(var(--animation-order) * 0.2s); }
+        @keyframes floatCard { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+        .game-card-grid::before { content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%; background: linear-gradient(to right, transparent, rgba(255,255,255,0.3), transparent); transform: skewX(-25deg); transition: all 0.8s ease; z-index: 10; pointer-events: none; }
+        .game-card-grid:hover { transform: translateY(-15px) scale(1.05) !important; box-shadow: 0 20px 50px rgba(0,229,255,0.6), 0 0 30px rgba(255,215,0,0.4); border-color: #00E5FF; }
         .game-card-grid:hover::before { left: 200%; }
-        .thumbnail { height: 180px; width: 100%; display: flex; align-items: center; justify-content: center; position: relative; font-family: 'Montserrat', sans-serif; background-size: cover; background-position: center; transition: transform 0.6s cubic-bezier(0.19, 1, 0.22, 1); border-bottom: 2px solid rgba(0,0,0,0.5); }
-        .game-card-grid:hover .thumbnail { transform: scale(1.15); }
-        .thumbnail::after { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(to bottom, transparent 60%, rgba(20,20,30,0.9) 100%); pointer-events: none; }
-        .card-details { padding: 25px 20px; text-align: center; background: linear-gradient(180deg, #181822 0%, #101015 100%); position: relative; z-index: 2; border-top: 1px solid rgba(255,255,255,0.05); }
-        .game-title { font-family: 'Montserrat', sans-serif; font-weight: 900; margin-bottom: 5px; display: block; font-size: 1.3rem; text-transform: uppercase; background: linear-gradient(135deg, #FFF, #AAA); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-shadow: 0 2px 10px rgba(0,0,0,0.8); letter-spacing: 1px; }
-        .provider { font-size: 0.85rem; display: inline-block; font-weight: 700; padding: 5px 15px; border-radius: 30px; background: rgba(0,0,0,0.4); margin-bottom: 15px; color: #BBB; border: 1px solid rgba(255,255,255,0.05); box-shadow: inset 0 2px 10px rgba(0,0,0,0.5); text-transform: uppercase; letter-spacing: 1px; }
-        .claim-btn { margin-top: 5px; padding: 12px 25px; background: linear-gradient(180deg, #00E676 0%, #00B259 100%); border: none; border-radius: 30px; color: #000; font-weight: 900; cursor: pointer; text-transform: uppercase; font-size: 0.9rem; transition: all 0.2s; box-shadow: 0 6px 0 #008240, 0 10px 20px rgba(0, 230, 118, 0.4); font-family: 'Poppins', sans-serif; letter-spacing: 1px; width: 100%; text-shadow: 0 1px 1px rgba(255,255,255,0.4); }
-        .game-card-grid:hover .claim-btn { background: linear-gradient(180deg, #FFD700 0%, #FFA500 100%); box-shadow: 0 6px 0 #CC7A00, 0 15px 30px rgba(255, 215, 0, 0.6); }
-        .claim-btn:active { transform: translateY(6px); box-shadow: 0 0 0 #008240, 0 5px 10px rgba(0,0,0,0.3); }
+        .thumbnail { height: 180px; width: 100%; display: flex; align-items: center; justify-content: center; position: relative; background-size: cover; background-position: center; transition: transform 0.4s ease; border-bottom: 2px solid rgba(0,0,0,0.8); }
+        .game-card-grid:hover .thumbnail { transform: scale(1.1); }
+        .thumbnail::after { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(to bottom, transparent 50%, rgba(10,10,15,0.95) 100%); pointer-events: none; }
+        .card-details { padding: 25px 20px; text-align: center; background: #111116; position: relative; z-index: 2; }
+        .game-title { font-family: 'Montserrat', sans-serif; font-weight: 900; margin-bottom: 5px; display: block; font-size: 1.4rem; text-transform: uppercase; color: #fff; text-shadow: 0 0 10px rgba(255, 255, 255, 0.5); letter-spacing: 1px; }
+        .provider { font-size: 0.8rem; display: inline-block; font-weight: 700; padding: 5px 15px; border-radius: 30px; background: rgba(255,255,255,0.1); margin-bottom: 15px; color: #FFF; text-transform: uppercase; letter-spacing: 1.5px; }
+        .claim-btn { padding: 12px 25px; background: linear-gradient(90deg, #00E5FF, #00B4DB, #00E5FF); background-size: 200% auto; border: none; border-radius: 30px; color: #000; font-weight: 900; cursor: pointer; text-transform: uppercase; font-size: 1rem; box-shadow: 0 0 20px rgba(0, 229, 255, 0.6), inset 0 -3px 0 rgba(0,0,0,0.3); font-family: 'Montserrat', sans-serif; letter-spacing: 1px; width: 100%; animation: neonPulse 2s infinite, shineBtn 3s infinite linear; text-shadow: none; transition: transform 0.2s; }
+        @keyframes neonPulse { 0%, 100% { box-shadow: 0 0 15px rgba(0,229,255,0.5); transform: scale(1); } 50% { box-shadow: 0 0 30px rgba(0,229,255,1); transform: scale(1.05); } }
+        @keyframes shineBtn { to { background-position: 200% center; } }
+        .game-card-grid:hover .claim-btn { background: linear-gradient(90deg, #FFD700, #FFA500, #FFD700); background-size: 200% auto; box-shadow: 0 0 30px rgba(255, 215, 0, 0.8); animation: neonPulseGold 1.5s infinite, shineBtn 2s infinite linear; }
+        @keyframes neonPulseGold { 0%, 100% { box-shadow: 0 0 20px rgba(255,215,0,0.6); transform: scale(1); } 50% { box-shadow: 0 0 40px rgba(255,215,0,1); transform: scale(1.1); } }
+        .claim-btn:active { transform: translateY(4px) !important; box-shadow: 0 0 10px transparent !important; }
 
         /* Card Colors */
         :root { --purple: #8A2BE2; --green: #00E676; --red: #FF3D00; --blue: #2962FF; --gold: #FFD600; --cyan: #00E5FF; --pink: #F50057; --yellow: #FFEA00; --electric-blue: #2979FF; --orange: #FF6D00; }
@@ -188,16 +197,17 @@
         @keyframes confettiFall { 0% { transform: translateY(0) rotate(0deg); opacity: 1; } 100% { transform: translateY(100vh) rotate(720deg); opacity: 0; } }
 
         /* Categories */
-        .categories { display: flex; gap: 15px; padding: 40px 20px; width: 90%; max-width: 1000px; margin: 0 auto; overflow-x: auto; justify-content: center; flex-wrap: wrap; position: relative; z-index: 10; }
-        .cat-btn { padding: 12px 25px; border: none; border-radius: 50px; font-weight: 700; cursor: pointer; transition: all 0.4s; text-transform: uppercase; font-size: 0.9rem; box-shadow: 0 8px 25px rgba(0,0,0,0.3); font-family: 'Poppins', sans-serif; position: relative; overflow: hidden; }
-        .cat-btn::before { content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%; background: linear-gradient(to right, transparent, rgba(255,255,255,0.4), transparent); transform: skewX(-20deg); transition: all 0.5s ease; z-index: 1; pointer-events: none; }
+        .categories { display: flex; gap: 20px; padding: 50px 20px; width: 90%; max-width: 1200px; margin: 0 auto; overflow-x: auto; justify-content: center; flex-wrap: wrap; position: relative; z-index: 10; }
+        .cat-btn { padding: 15px 35px; border: none; border-radius: 50px; font-weight: 900; cursor: pointer; transition: all 0.3s; text-transform: uppercase; font-size: 1.1rem; box-shadow: 0 10px 30px rgba(0,0,0,0.6), inset 0 2px 5px rgba(255,255,255,0.4); font-family: 'Montserrat', sans-serif; letter-spacing: 2px; position: relative; overflow: hidden; animation: floatBtn 4s ease-in-out infinite; animation-delay: calc(var(--delay) * 0.2s); }
+        @keyframes floatBtn { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+        .cat-btn::before { content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%; background: linear-gradient(to right, transparent, rgba(255,255,255,0.6), transparent); transform: skewX(-20deg); transition: all 0.5s ease; z-index: 1; pointer-events: none; }
         .cat-btn:hover::before { left: 200%; }
-        .cat-btn:hover { transform: scale(1.1) translateY(-5px); box-shadow: 0 15px 40px rgba(255,215,0,0.5); filter: brightness(1.2); }
-        .cat-slots { background: linear-gradient(135deg, var(--gold), var(--yellow)); color: #000; }
-        .cat-live { background: linear-gradient(135deg, var(--red), var(--pink)); color: white; }
-        .cat-table { background: linear-gradient(135deg, var(--green), var(--cyan)); color: #000; }
-        .cat-jackpot { background: linear-gradient(135deg, var(--purple), var(--orange)); color: white; }
-        .cat-new { background: linear-gradient(135deg, var(--cyan), var(--electric-blue)); color: #000; }
+        .cat-btn:hover { transform: scale(1.15) !important; box-shadow: 0 20px 50px rgba(255,215,0,0.8), inset 0 2px 5px rgba(255,255,255,0.8); filter: brightness(1.3); z-index: 20; border: 2px solid #FFF; }
+        .cat-slots { background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%); color: #000; }
+        .cat-live { background: linear-gradient(135deg, #FF0055 0%, #CC0000 100%); color: white; }
+        .cat-table { background: linear-gradient(135deg, #00E676 0%, #00994D 100%); color: #000; }
+        .cat-jackpot { background: linear-gradient(135deg, #9C27B0 0%, #6A1B9A 100%); color: white; }
+        .cat-new { background: linear-gradient(135deg, #00E5FF 0%, #0091EA 100%); color: #000; }
 
         /* Game thumb colors for carousel */
         .thumb-juwa { background: linear-gradient(135deg, #FF6B35, #FFD700); }
@@ -397,7 +407,7 @@
     <!-- Game Grid -->
     <div class="game-grid">
         <!-- Juwa777 -->
-        <div class="game-card-grid card-purple" onclick="sendTelegramMessage('juwa777', 'Juwa777')">
+        <div class="game-card-grid card-purple" style="--animation-order: 1" onclick="sendTelegramMessage('juwa777', 'Juwa777')">
             <div class="thumbnail" style="background-image: url('juwa.jpg');">
             </div>
             <div class="card-details">
@@ -408,7 +418,7 @@
         </div>
 
         <!-- Orion Stars -->
-        <div class="game-card-grid card-green" onclick="sendTelegramMessage('orionstars', 'Orion Stars')">
+        <div class="game-card-grid card-green" style="--animation-order: 2" onclick="sendTelegramMessage('orionstars', 'Orion Stars')">
             <div class="thumbnail" style="background-image: url('orion.jpg');">
             </div>
             <div class="card-details">
@@ -419,7 +429,7 @@
         </div>
 
         <!-- Fire Kirin -->
-        <div class="game-card-grid card-red" onclick="sendTelegramMessage('firekirin', 'Fire Kirin')">
+        <div class="game-card-grid card-red" style="--animation-order: 3" onclick="sendTelegramMessage('firekirin', 'Fire Kirin')">
             <div class="thumbnail" style="background-image: url('firekirin.jpg');">
             </div>
             <div class="card-details">
@@ -430,7 +440,7 @@
         </div>
 
         <!-- Panda Master -->
-        <div class="game-card-grid card-blue" onclick="sendTelegramMessage('pandamaster', 'Panda Master')">
+        <div class="game-card-grid card-blue" style="--animation-order: 4" onclick="sendTelegramMessage('pandamaster', 'Panda Master')">
             <div class="thumbnail" style="background-image: url('panda.jpg');">
             </div>
             <div class="card-details">
@@ -441,7 +451,7 @@
         </div>
 
         <!-- Milkyway -->
-        <div class="game-card-grid card-gold" onclick="sendTelegramMessage('milkyway', 'Milkyway')">
+        <div class="game-card-grid card-gold" style="--animation-order: 5" onclick="sendTelegramMessage('milkyway', 'Milkyway')">
             <div class="thumbnail" style="background-image: url('milkyway.jpg');">
             </div>
             <div class="card-details">
@@ -452,7 +462,7 @@
         </div>
 
         <!-- Mafia -->
-        <div class="game-card-grid card-pink" onclick="sendTelegramMessage('mafia', 'Mafia')">
+        <div class="game-card-grid card-pink" style="--animation-order: 6" onclick="sendTelegramMessage('mafia', 'Mafia')">
             <div class="thumbnail" style="background-image: url('mafia.jpg');">
             </div>
             <div class="card-details">
@@ -463,7 +473,7 @@
         </div>
 
         <!-- Game Vault -->
-        <div class="game-card-grid card-cyan" onclick="sendTelegramMessage('gamevault', 'Game Vault')">
+        <div class="game-card-grid card-cyan" style="--animation-order: 7" onclick="sendTelegramMessage('gamevault', 'Game Vault')">
             <div class="thumbnail" style="background-image: url('vault.jpg');">
             </div>
             <div class="card-details">
@@ -474,7 +484,7 @@
         </div>
 
         <!-- Vegas Sweeps -->
-        <div class="game-card-grid card-yellow" onclick="sendTelegramMessage('vegassweeps', 'Vegas Sweeps')">
+        <div class="game-card-grid card-yellow" style="--animation-order: 8" onclick="sendTelegramMessage('vegassweeps', 'Vegas Sweeps')">
             <div class="thumbnail" style="background-image: url('vegas.jpg');">
             </div>
             <div class="card-details">
@@ -485,7 +495,7 @@
         </div>
 
         <!-- Blue Dragon -->
-        <div class="game-card-grid card-electric" onclick="sendTelegramMessage('bluedragon', 'Blue Dragon')">
+        <div class="game-card-grid card-electric" style="--animation-order: 9" onclick="sendTelegramMessage('bluedragon', 'Blue Dragon')">
             <div class="thumbnail" style="background-image: url('dragon.jpg');">
             </div>
             <div class="card-details">
@@ -496,7 +506,7 @@
         </div>
 
         <!-- Mr All in One -->
-        <div class="game-card-grid card-orange" onclick="sendTelegramMessage('mrallinone', 'Mr All in One')">
+        <div class="game-card-grid card-orange" style="--animation-order: 10" onclick="sendTelegramMessage('mrallinone', 'Mr All in One')">
             <div class="thumbnail" style="background-image: url('allin.jpg');">
             </div>
             <div class="card-details">
@@ -507,7 +517,7 @@
         </div>
 
         <!-- Highstakes -->
-        <div class="game-card-grid card-dark" onclick="sendTelegramMessage('highstakes', 'Highstakes')">
+        <div class="game-card-grid card-dark" style="--animation-order: 11" onclick="sendTelegramMessage('highstakes', 'Highstakes')">
             <div class="thumbnail" style="background-image: url('high.jpg');">
             </div>
             <div class="card-details">
@@ -518,7 +528,7 @@
         </div>
 
         <!-- River Monster -->
-        <div class="game-card-grid card-teal" onclick="sendTelegramMessage('rivermonster', 'River Monster')">
+        <div class="game-card-grid card-teal" style="--animation-order: 12" onclick="sendTelegramMessage('rivermonster', 'River Monster')">
             <div class="thumbnail" style="background-image: url('monster.jpg');">
             </div>
             <div class="card-details">
@@ -531,11 +541,11 @@
 
     <!-- Categories -->
     <div class="categories">
-        <button class="cat-btn cat-slots">🎰 Slots</button>
-        <button class="cat-btn cat-live">🎥 Live Casino</button>
-        <button class="cat-btn cat-table">♠️ Table Games</button>
-        <button class="cat-btn cat-jackpot">💎 Jackpots</button>
-        <button class="cat-btn cat-new">✨ New Games</button>
+        <button class="cat-btn cat-slots" style="--delay: 1">🎰 Slots</button>
+        <button class="cat-btn cat-live" style="--delay: 2">🎥 Live Casino</button>
+        <button class="cat-btn cat-table" style="--delay: 3">♠️ Table Games</button>
+        <button class="cat-btn cat-jackpot" style="--delay: 4">💎 Jackpots</button>
+        <button class="cat-btn cat-new" style="--delay: 5">✨ New Games</button>
     </div>
 
     <!-- Telegram Strip -->
